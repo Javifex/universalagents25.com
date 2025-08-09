@@ -574,4 +574,223 @@ footer {
     }
 
     .features h2,
-    .services
+    .services h2,
+    .contact h2 {
+        font-size: 2rem;
+    }
+
+    .features-grid,
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .feature-card,
+    .service-card {
+        margin: 1rem 0;
+        padding: 1.5rem;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    .contact-info p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .features h2,
+    .services h2,
+    .contact h2 {
+        font-size: 1.8rem;
+    }
+
+    .feature-card,
+    .service-card {
+        padding: 1.2rem;
+    }
+
+    .features-grid,
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .hero {
+        background: #000;
+    }
+    
+    .feature-card,
+    .service-card {
+        border: 2px solid #333;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    }
+    
+    .features {
+        background: #2c3e50;
+    }
+    
+    .features h2,
+    .feature-card h3,
+    .service-card h3 {
+        color: #fff;
+    }
+    
+    .feature-card,
+    .service-card {
+        background: #34495e;
+        border-color: #4a5f7a;
+    }
+    
+    .feature-card p,
+    .service-card p {
+        color: #bbb;
+    }
+}
+
+/* Print styles */
+@media print {
+    header,
+    .mobile-menu,
+    .cta-button,
+    footer {
+        display: none !important;
+    }
+    
+    .hero {
+        background: none !important;
+        color: #000 !important;
+        page-break-after: always;
+    }
+    
+    .features,
+    .services {
+        background: none !important;
+    }
+    
+    .contact {
+        background: none !important;
+        color: #000 !important;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #764ba2, #667eea);
+}
+
+/* Selection styles */
+::selection {
+    background: rgba(102, 126, 234, 0.3);
+    color: #333;
+}
+
+::-moz-selection {
+    background: rgba(102, 126, 234, 0.3);
+    color: #333;
+}
+
+/* Focus styles for accessibility */
+a:focus,
+button:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Loading animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Utility classes */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
