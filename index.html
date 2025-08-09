@@ -4,7 +4,327 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Agents - Agentes de IA para WhatsApp</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Revoluciona tu negocio con agentes de Inteligencia Artificial especializados para WhatsApp. Automatización 24/7, respuestas instantáneas y más ventas.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="300" cy="800" r="120" fill="url(%23a)"/></svg>') no-repeat center center;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(45deg, #128C7E, #25D366);
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.516"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-left-color: #764ba2;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .features-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card,
+            .service-card {
+                margin: 1rem 0;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation for better UX */
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -39,32 +359,32 @@
         <div class="container">
             <h2>¿Por qué elegir nuestros Agentes IA?</h2>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">🤖</div>
                     <h3>Automatización Inteligente</h3>
                     <p>Nuestros agentes de IA responden automáticamente a tus clientes 24/7, mejorando la experiencia del usuario y aumentando las conversiones.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">💬</div>
                     <h3>Integración WhatsApp</h3>
                     <p>Perfecta integración con WhatsApp Business para gestionar conversaciones, leads y ventas de manera eficiente y profesional.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">📈</div>
                     <h3>Análisis Avanzado</h3>
                     <p>Obtén insights detallados sobre las interacciones con tus clientes y optimiza tu estrategia de ventas con datos precisos.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">⚡</div>
                     <h3>Respuesta Instantánea</h3>
                     <p>Respuestas inmediatas a consultas frecuentes, reservas, pedidos y soporte técnico sin tiempo de espera.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">🎯</div>
                     <h3>Personalización Total</h3>
                     <p>Agentes completamente personalizados según tu industria, tono de marca y necesidades específicas del negocio.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">🔧</div>
                     <h3>Configuración Simple</h3>
                     <p>Implementación rápida y sencilla con soporte técnico completo para que estés operativo en minutos.</p>
@@ -78,27 +398,27 @@
         <div class="container">
             <h2>Nuestros Servicios</h2>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card fade-in">
                     <h3>Agente de Ventas IA</h3>
                     <p>Automatiza todo el proceso de ventas desde la captación hasta el cierre. Califica leads, presenta productos y procesa pedidos automáticamente.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card fade-in">
                     <h3>Soporte al Cliente IA</h3>
                     <p>Brinda soporte 24/7 resolviendo consultas comunes, problemas técnicos y dirigiendo casos complejos al equipo humano cuando sea necesario.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card fade-in">
                     <h3>Agente de Reservas IA</h3>
                     <p>Perfecto para restaurantes, spas, clínicas y servicios. Gestiona reservas, cancelaciones y confirmaciones de manera automática.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card fade-in">
                     <h3>Agente de Marketing IA</h3>
                     <p>Envía promociones personalizadas, follow-ups de ventas y campañas de remarketing basadas en el comportamiento del usuario.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card fade-in">
                     <h3>Agente Educativo IA</h3>
                     <p>Ideal para cursos online y coaching. Proporciona información sobre programas, procesa inscripciones y da seguimiento a estudiantes.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card fade-in">
                     <h3>Personalización Completa</h3>
                     <p>¿Necesitas algo específico? Creamos agentes IA totalmente personalizados para cualquier industria o caso de uso particular.</p>
                 </div>
@@ -111,183 +431,74 @@
         <div class="container">
             <h2>¿Listo para transformar tu negocio?</h2>
             <p>Contacta con nosotros y descubre cómo nuestros agentes de IA pueden revolucionar tu atención al cliente y aumentar tus ventas</p>
-            <a href="https://wa.me/1234567890?text=Hola, estoy interesado en los agentes de IA para WhatsApp" class="cta-button">
+            <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20los%20agentes%20de%20IA%20para%20WhatsApp" class="cta-button">
                 <div class="whatsapp-icon"></div>
                 Hablar por WhatsApp
             </a>
+            <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                <p>📧 Email: soporte@universalagents25.com</p>
+                <p>🌐 Web: universalagents25.com</p>
+                <p>📍 35 Malta Ave, Unit 20, Ontario, Canadá</p>
+            </div>
         </div>
     </section>
-
-<h1>Privacy Policy</h1>
-<p>Last updated: August 09, 2025</p>
-<p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
-<p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
-<h2>Interpretation and Definitions</h2>
-<h3>Interpretation</h3>
-<p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
-<h3>Definitions</h3>
-<p>For the purposes of this Privacy Policy:</p>
-<ul>
-<li>
-<p><strong>Account</strong> means a unique account created for You to access our Service or parts of our Service.</p>
-</li>
-<li>
-<p><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where &quot;control&quot; means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</p>
-</li>
-<li>
-<p><strong>Application</strong> refers to Universal Agents, the software program provided by the Company.</p>
-</li>
-<li>
-<p><strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Universal Agents, 35 Malta Av, unit 20.</p>
-</li>
-<li>
-<p><strong>Country</strong> refers to: Ontario,  Canada</p>
-</li>
-<li>
-<p><strong>Device</strong> means any device that can access the Service such as a computer, a cellphone or a digital tablet.</p>
-</li>
-<li>
-<p><strong>Personal Data</strong> is any information that relates to an identified or identifiable individual.</p>
-</li>
-<li>
-<p><strong>Service</strong> refers to the Application.</p>
-</li>
-<li>
-<p><strong>Service Provider</strong> means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.</p>
-</li>
-<li>
-<p><strong>Usage Data</strong> refers to data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit).</p>
-</li>
-<li>
-<p><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</p>
-</li>
-</ul>
-<h2>Collecting and Using Your Personal Data</h2>
-<h3>Types of Data Collected</h3>
-<h4>Personal Data</h4>
-<p>While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:</p>
-<ul>
-<li>
-<p>Email address</p>
-</li>
-<li>
-<p>First name and last name</p>
-</li>
-<li>
-<p>Phone number</p>
-</li>
-<li>
-<p>Address, State, Province, ZIP/Postal code, City</p>
-</li>
-<li>
-<p>Usage Data</p>
-</li>
-</ul>
-<h4>Usage Data</h4>
-<p>Usage Data is collected automatically when using the Service.</p>
-<p>Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
-<p>When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.</p>
-<p>We may also collect information that Your browser sends whenever You visit our Service or when You access the Service by or through a mobile device.</p>
-<h4>Information Collected while Using the Application</h4>
-<p>While using Our Application, in order to provide features of Our Application, We may collect, with Your prior permission:</p>
-<ul>
-<li>Pictures and other information from your Device's camera and photo library</li>
-</ul>
-<p>We use this information to provide features of Our Service, to improve and customize Our Service. The information may be uploaded to the Company's servers and/or a Service Provider's server or it may be simply stored on Your device.</p>
-<p>You can enable or disable access to this information at any time, through Your Device settings.</p>
-<h3>Use of Your Personal Data</h3>
-<p>The Company may use Personal Data for the following purposes:</p>
-<ul>
-<li>
-<p><strong>To provide and maintain our Service</strong>, including to monitor the usage of our Service.</p>
-</li>
-<li>
-<p><strong>To manage Your Account:</strong> to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user.</p>
-</li>
-<li>
-<p><strong>For the performance of a contract:</strong> the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service.</p>
-</li>
-<li>
-<p><strong>To contact You:</strong> To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation.</p>
-</li>
-<li>
-<p><strong>To provide You</strong> with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless You have opted not to receive such information.</p>
-</li>
-<li>
-<p><strong>To manage Your requests:</strong> To attend and manage Your requests to Us.</p>
-</li>
-<li>
-<p><strong>For business transfers:</strong> We may use Your information to evaluate or conduct a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of Our assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which Personal Data held by Us about our Service users is among the assets transferred.</p>
-</li>
-<li>
-<p><strong>For other purposes</strong>: We may use Your information for other purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and to evaluate and improve our Service, products, services, marketing and your experience.</p>
-</li>
-</ul>
-<p>We may share Your personal information in the following situations:</p>
-<ul>
-<li><strong>With Service Providers:</strong> We may share Your personal information with Service Providers to monitor and analyze the use of our Service,  to contact You.</li>
-<li><strong>For business transfers:</strong> We may share or transfer Your personal information in connection with, or during negotiations of, any merger, sale of Company assets, financing, or acquisition of all or a portion of Our business to another company.</li>
-<li><strong>With Affiliates:</strong> We may share Your information with Our affiliates, in which case we will require those affiliates to honor this Privacy Policy. Affiliates include Our parent company and any other subsidiaries, joint venture partners or other companies that We control or that are under common control with Us.</li>
-<li><strong>With business partners:</strong> We may share Your information with Our business partners to offer You certain products, services or promotions.</li>
-<li><strong>With other users:</strong> when You share personal information or otherwise interact in the public areas with other users, such information may be viewed by all users and may be publicly distributed outside.</li>
-<li><strong>With Your consent</strong>: We may disclose Your personal information for any other purpose with Your consent.</li>
-</ul>
-<h3>Retention of Your Personal Data</h3>
-<p>The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.</p>
-<p>The Company will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period of time, except when this data is used to strengthen the security or to improve the functionality of Our Service, or We are legally obligated to retain this data for longer time periods.</p>
-<h3>Transfer of Your Personal Data</h3>
-<p>Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from Your jurisdiction.</p>
-<p>Your consent to this Privacy Policy followed by Your submission of such information represents Your agreement to that transfer.</p>
-<p>The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information.</p>
-<h3>Delete Your Personal Data</h3>
-<p>You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You.</p>
-<p>Our Service may give You the ability to delete certain information about You from within the Service.</p>
-<p>You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any personal information that You have provided to Us.</p>
-<p>Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.</p>
-<h3>Disclosure of Your Personal Data</h3>
-<h4>Business Transactions</h4>
-<p>If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.</p>
-<h4>Law enforcement</h4>
-<p>Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).</p>
-<h4>Other legal requirements</h4>
-<p>The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:</p>
-<ul>
-<li>Comply with a legal obligation</li>
-<li>Protect and defend the rights or property of the Company</li>
-<li>Prevent or investigate possible wrongdoing in connection with the Service</li>
-<li>Protect the personal safety of Users of the Service or the public</li>
-<li>Protect against legal liability</li>
-</ul>
-<h3>Security of Your Personal Data</h3>
-<p>The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.</p>
-<h2>Children's Privacy</h2>
-<p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers.</p>
-<p>If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.</p>
-<h2>Links to Other Websites</h2>
-<p>Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.</p>
-<p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
-<h2>Changes to this Privacy Policy</h2>
-<p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.</p>
-<p>We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the &quot;Last updated&quot; date at the top of this Privacy Policy.</p>
-<p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
-<h2>Contact Us</h2>
-<p>If you have any questions about this Privacy Policy, You can contact us:</p>
-<ul>
-<li>
-<p>By email: soporte@universalagents25.com</p>
-</li>
-<li>
-<p>By visiting this page on our website: <a href="https://universalagents25.com" rel="external nofollow noopener" target="_blank">https://universalagents25.com</a></p>
-</li>
-</ul>
     
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Universal Agents. Todos los derechos reservados. | Agentes de IA para WhatsApp</p>
+            <p>&copy; 2025 Universal Agents. Todos los derechos reservados.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.7;">
+                Agentes de IA para WhatsApp | 
+                <a href="#privacy" style="color: #ccc; text-decoration: none;">Política de Privacidad</a>
+            </p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Update WhatsApp link to be more mobile-friendly
+        const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+        whatsappLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // On mobile, this will open WhatsApp app directly
+                // On desktop, it will open WhatsApp Web
+                if (window.innerWidth <= 768) {
+                    this.href = this.href.replace('wa.me', 'api.whatsapp.com/send?phone=');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
