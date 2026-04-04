@@ -3,9 +3,718 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Universal Agents - Agentes de Inteligencia Artificial especializados para WhatsApp. Automatiza ventas, soporte y atención al cliente 24/7.">
+    <meta name="keywords" content="IA WhatsApp, chatbots, agentes IA, automatización, ventas, soporte al cliente">
+    <meta name="author" content="Universal Agents">
+    <meta property="og:title" content="Universal Agents - Agentes de IA para WhatsApp">
+    <meta property="og:description" content="Revoluciona tu negocio con agentes de IA especializados para WhatsApp">
+    <meta property="og:type" content="website">
     <title>Universal Agents - Agentes de IA para WhatsApp</title>
-    <meta name="description" content="Revoluciona tu negocio con agentes de Inteligencia Artificial especializados para WhatsApp. Automatización 24/7, respuestas instantáneas y más ventas.">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #222;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #25D366;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="10" cy="90" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.87 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.085"/></svg>') no-repeat center;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(103, 126, 234, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .service-card:nth-child(3) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border: 3px solid #667eea;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-card ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-card ul li::before {
+            content: '✓ ';
+            color: #25D366;
+            font-weight: bold;
+        }
+
+        .pricing-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #fff 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .testimonial-position {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Policy Section */
+        .policy {
+            padding: 100px 0;
+            background: #f5f7fa;
+        }
+
+        .policy h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .policy-intro {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: #555;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .policy-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .policy-section h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .tier-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .tier-card h4 {
+            color: #333;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .requirements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .user-type {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .user-type h5 {
+            color: #764ba2;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .user-type ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .user-type li {
+            padding: 0.4rem 0;
+            color: #555;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .user-type li::before {
+            content: '•';
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .policy-note {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+
+        .policy-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .policy-list li {
+            padding: 0.6rem 0;
+            color: #555;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .policy-list li::before {
+            content: '✓';
+            color: #25D366;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Floating WhatsApp Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        .floating-whatsapp svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                pointer-events: none;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .features-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-whatsapp {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -16,9 +725,11 @@
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#caracteristicas">Características</a></li>
+                <li><a href="#precios">Precios</a></li>
                 <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#politica">Política de Acceso</a></li>
             </ul>
-            <div class="mobile-menu" id="mobile-menu">
+            <div class="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -45,32 +756,32 @@
         <div class="container">
             <h2>¿Por qué elegir nuestros Agentes IA?</h2>
             <div class="features-grid">
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">🤖</div>
                     <h3>Automatización Inteligente</h3>
                     <p>Nuestros agentes de IA responden automáticamente a tus clientes 24/7, mejorando la experiencia del usuario y aumentando las conversiones.</p>
                 </div>
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">💬</div>
                     <h3>Integración WhatsApp</h3>
                     <p>Perfecta integración con WhatsApp Business para gestionar conversaciones, leads y ventas de manera eficiente y profesional.</p>
                 </div>
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">📈</div>
                     <h3>Análisis Avanzado</h3>
                     <p>Obtén insights detallados sobre las interacciones con tus clientes y optimiza tu estrategia de ventas con datos precisos.</p>
                 </div>
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Respuesta Instantánea</h3>
                     <p>Respuestas inmediatas a consultas frecuentes, reservas, pedidos y soporte técnico sin tiempo de espera.</p>
                 </div>
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">🎯</div>
                     <h3>Personalización Total</h3>
                     <p>Agentes completamente personalizados según tu industria, tono de marca y necesidades específicas del negocio.</p>
                 </div>
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">🔧</div>
                     <h3>Configuración Simple</h3>
                     <p>Implementación rápida y sencilla con soporte técnico completo para que estés operativo en minutos.</p>
@@ -84,29 +795,115 @@
         <div class="container">
             <h2>Nuestros Servicios</h2>
             <div class="services-grid">
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <h3>Agente de Ventas IA</h3>
                     <p>Automatiza todo el proceso de ventas desde la captación hasta el cierre. Califica leads, presenta productos y procesa pedidos automáticamente.</p>
                 </div>
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <h3>Soporte al Cliente IA</h3>
                     <p>Brinda soporte 24/7 resolviendo consultas comunes, problemas técnicos y dirigiendo casos complejos al equipo humano cuando sea necesario.</p>
                 </div>
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <h3>Agente de Reservas IA</h3>
                     <p>Perfecto para restaurantes, spas, clínicas y servicios. Gestiona reservas, cancelaciones y confirmaciones de manera automática.</p>
                 </div>
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <h3>Agente de Marketing IA</h3>
                     <p>Envía promociones personalizadas, follow-ups de ventas y campañas de remarketing basadas en el comportamiento del usuario.</p>
                 </div>
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <h3>Agente Educativo IA</h3>
                     <p>Ideal para cursos online y coaching. Proporciona información sobre programas, procesa inscripciones y da seguimiento a estudiantes.</p>
                 </div>
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <h3>Personalización Completa</h3>
                     <p>¿Necesitas algo específico? Creamos agentes IA totalmente personalizados para cualquier industria o caso de uso particular.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="precios" class="pricing">
+        <div class="container">
+            <h2>Planes y Precios</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Básico</h3>
+                    <div class="price">$49 <span>/mes</span></div>
+                    <ul>
+                        <li>1 Agente de IA</li>
+                        <li>Hasta 1000 conversaciones/mes</li>
+                        <li>Soporte por email</li>
+                        <li>Estadísticas básicas</li>
+                        <li>Integración WhatsApp</li>
+                    </ul>
+                    <a href="#contacto" class="pricing-button">Comenzar</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Profesional</h3>
+                    <div class="price">$99 <span>/mes</span></div>
+                    <ul>
+                        <li>3 Agentes de IA</li>
+                        <li>Hasta 5000 conversaciones/mes</li>
+                        <li>Soporte prioritario</li>
+                        <li>Análisis avanzado</li>
+                        <li>Personalización completa</li>
+                        <li>Integraciones adicionales</li>
+                    </ul>
+                    <a href="#contacto" class="pricing-button">Comenzar</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Empresa</h3>
+                    <div class="price">$199 <span>/mes</span></div>
+                    <ul>
+                        <li>Agentes ilimitados</li>
+                        <li>Conversaciones ilimitadas</li>
+                        <li>Soporte 24/7 dedicado</li>
+                        <li>API personalizada</li>
+                        <li>Gestor de cuenta</li>
+                        <li>Formación incluida</li>
+                    </ul>
+                    <a href="#contacto" class="pricing-button">Contactar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Lo que dicen nuestros clientes</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Desde que implementamos el agente de IA, nuestras ventas por WhatsApp aumentaron un 40%. Los clientes obtienen respuestas inmediatas las 24 horas."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MG</div>
+                        <div>
+                            <div class="testimonial-name">María González</div>
+                            <div class="testimonial-position">Directora de Ventas, RetailPlus</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"El soporte al cliente se automatizó completamente. Ahora nuestro equipo puede enfocarse en casos complejos mientras la IA resuelve el 80% de las consultas."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">CR</div>
+                        <div>
+                            <div class="testimonial-name">Carlos Rodríguez</div>
+                            <div class="testimonial-position">CEO, TechServices</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Implementación súper rápida. En menos de 24 horas teníamos nuestro agente funcionando. El ROI se vio en la primera semana."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AL</div>
+                        <div>
+                            <div class="testimonial-name">Ana López</div>
+                            <div class="testimonial-position">Gerente, Restaurante La Buena Mesa</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,28 +914,99 @@
         <div class="container">
             <h2>¿Listo para transformar tu negocio?</h2>
             <p>Contacta con nosotros y descubre cómo nuestros agentes de IA pueden revolucionar tu atención al cliente y aumentar tus ventas</p>
-            <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20los%20agentes%20de%20IA%20para%20WhatsApp" class="cta-button">
+            <a href="https://wa.me/1234567890?text=Hola, estoy interesado en los agentes de IA para WhatsApp" class="cta-button">
                 <div class="whatsapp-icon"></div>
                 Hablar por WhatsApp
             </a>
-            <div class="contact-info">
-                <p>📧 Email: soporte@universalagents25.com</p>
-                <p>🌐 Web: universalagents25.com</p>
-                <p>📍 35 Malta Ave, Unit 20, Ontario, Canadá</p>
+        </div>
+    </section>
+
+    <!-- Access Policy Section -->
+    <section id="politica" class="policy">
+        <div class="container">
+            <h2>Política de Control de Acceso y Llamadas Salientes</h2>
+            <p class="policy-intro">Nuestra plataforma implementa un sistema de control de acceso por niveles con verificación de identidad antes de otorgar privilegios de llamadas salientes:</p>
+            
+            <div class="policy-section">
+                <h3>Niveles de Acceso</h3>
+                
+                <div class="tier-card">
+                    <h4>Nivel 1 — Solo Entrante (predeterminado):</h4>
+                    <p>Todos los usuarios nuevos comienzan solo con llamadas entrantes. Pueden configurar agentes de voz de IA para recibir llamadas, pero no pueden iniciar llamadas salientes ni comprar números telefónicos. No se requiere verificación de identidad en este nivel.</p>
+                </div>
+                
+                <div class="tier-card">
+                    <h4>Nivel 2 — Llamadas Salientes Habilitadas (usuarios verificados):</h4>
+                    <p>Para desbloquear las llamadas salientes y la compra de números telefónicos, los usuarios deben completar un proceso de verificación KYC (Conozca a Su Cliente) obligatorio. Los requisitos varían según el tipo de usuario:</p>
+                    
+                    <div class="requirements">
+                        <div class="user-type">
+                            <h5>Para Personas Naturales:</h5>
+                            <ul>
+                                <li>RUT (Registro Único Tributario)</li>
+                                <li>Cédula de Ciudadanía — documento nacional de identidad emitido por el gobierno, validado contra la Registraduría Nacional del Estado Civil</li>
+                                <li>Comprobante de Domicilio — factura de servicios públicos reciente, estado de cuenta bancario o correspondencia oficial (emitida en los últimos 3 meses)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="user-type">
+                            <h5>Para Personas Jurídicas:</h5>
+                            <ul>
+                                <li>Certificado de Cámara y Comercio — certificado oficial de registro de la Cámara de Comercio (emitido en los últimos 30 días)</li>
+                                <li>Cédula de Ciudadanía del Representante Legal — documento nacional de identidad del representante legal, para verificar autorización para actuar en nombre del negocio</li>
+                                <li>Comprobante de Domicilio del Negocio — factura de servicios públicos reciente (electricidad, agua, gas o internet) que coincida con la dirección registrada del negocio</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <p class="policy-note">Todos los documentos son revisados manualmente antes de la aprobación. Las cuentas que fallen la verificación o presenten documentos fraudulentos serán baneadas permanentemente.</p>
+                </div>
+            </div>
+            
+            <div class="policy-section">
+                <h3>Controles de Compra de Números Telefónicos</h3>
+                <ul class="policy-list">
+                    <li>Solo los usuarios de Nivel 2 (verificados) pueden solicitar números telefónicos</li>
+                    <li>La asignación de números es gestionada directamente por nosotros — los usuarios no tienen acceso a la API del proveedor de telefonía</li>
+                    <li>Cada compra de número se registra con la identidad verificada del usuario solicitante</li>
+                    <li>Los números se provisionan según necesidad comercial legítima (los usuarios deben especificar el uso previsto)</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h3>Monitoreo Continuo</h3>
+                <ul class="policy-list">
+                    <li>Todas las campañas salientes requieren aprobación previa a través del panel de la plataforma antes de su ejecución</li>
+                    <li>El volumen de llamadas tiene límites de velocidad por cuenta según el nivel de verificación y el historial de uso</li>
+                    <li>Las cuentas que muestren patrones sospechosos (altas tasas de quejas, volúmenes anormales de llamadas, llamadas fuera de horas permitidas) se marcan automáticamente y se suspenden pendientes de revisión</li>
+                    <li>Mantenemos registros de auditoría completos que vinculan cada llamada saliente con la identidad de usuario verificada</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h3>Revocación</h3>
+                <p>Los privilegios de llamadas salientes pueden ser revocados inmediatamente si:</p>
+                <ul class="policy-list">
+                    <li>Un usuario viola la Política de Uso Aceptable</li>
+                    <li>La tasa de quejas excede el umbral del 1%</li>
+                    <li>Se descubre que los documentos de identidad son fraudulentos o han expirado</li>
+                    <li>El usuario es reportado ante la SIC (Superintendencia de Industria y Comercio) por abuso en telecomunicaciones</li>
+                </ul>
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Universal Agents. Todos los derechos reservados.</p>
-            <p class="footer-links">
-                Agentes de IA para WhatsApp | 
-                <a href="privacy.html">Política de Privacidad</a>
-            </p>
+            <p>&copy; 2026 Universal Agents. Todos los derechos reservados. | Agentes de IA para WhatsApp | <a href="#politica" style="color: #25D366; text-decoration: none;">Política de Acceso</a></p>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/1234567890?text=Hola, estoy interesado en los agentes de IA para WhatsApp" class="floating-whatsapp" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.87 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.085"/></svg>
+    </a>
 
     <script>
         // Smooth scrolling for navigation links
@@ -152,78 +1020,48 @@
                         block: 'start'
                     });
                 }
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+                document.querySelector('.hamburger').classList.remove('active');
             });
         });
 
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
-        mobileMenu.addEventListener('click', function() {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
         });
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            });
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
         });
 
-        // Add fade-in animation on scroll
+        // Feature cards animation on scroll
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -100px 0px'
         };
 
-        const observer = new IntersectionObserver(function(entries) {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    entry.target.classList.add('animated');
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
                 }
             });
         }, observerOptions);
 
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+        document.querySelectorAll('.feature-card, .service-card, .tier-card, .policy-section').forEach(card => {
+            observer.observe(card);
         });
-
-        // Update WhatsApp link to be more mobile-friendly
-        const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
-        whatsappLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Add analytics or tracking if needed
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'click', {
-                        'event_category': 'WhatsApp',
-                        'event_label': 'Contact Button'
-                    });
-                }
-            });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Preload critical resources
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'font';
-        link.type = 'font/woff2';
-        link.crossOrigin = 'anonymous';
-        document.head.appendChild(link);
     </script>
 </body>
 </html>
