@@ -1101,20 +1101,21 @@ button:focus {
 /* Platform Voice Campaigns Section */
 .platform {
     padding: 100px 0;
-    background: #f8fafc;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
 }
 
 .platform h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #1e293b;
+    color: white;
 }
 
 .platform-intro {
     text-align: center;
     font-size: 1.1rem;
-    color: #64748b;
+    color: rgba(255, 255, 255, 0.9);
     max-width: 800px;
     margin: 0 auto 3rem;
 }
@@ -1130,14 +1131,15 @@ button:focus {
     background: white;
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     text-align: center;
     transition: all 0.3s ease;
+    border-top: 4px solid #25D366;
 }
 
 .use-case-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
 }
 
 .use-case-icon {
@@ -1157,15 +1159,15 @@ button:focus {
 }
 
 .compliance-section {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
     padding: 2.5rem;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .compliance-section h3 {
     text-align: center;
-    color: #16a34a;
+    color: #667eea;
     margin-bottom: 2rem;
     font-size: 1.5rem;
 }
