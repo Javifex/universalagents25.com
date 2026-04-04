@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Política de Control de Acceso y Llamadas Salientes - Universal Agents">
+    <title>Política de Acceso - Universal Agents</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .policy-page {
+            padding-top: 120px 0 80px;
+            min-height: 100vh;
+            background: #f5f7fa;
+        }
+
+        .policy-page .container {
+            max-width: 900px;
+        }
+
+        .policy-page h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+            margin-top: 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Universal Agents</div>
+            <ul class="nav-links">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#servicios">Servicios</a></li>
+                <li><a href="index.html#caracteristicas">Características</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+            <button class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Policy Content -->
+    <section class="policy-page">
+        <div class="container">
+            <a href="index.html" class="back-link">← Volver al inicio</a>
+            
+            <h1>Política de Control de Acceso y Llamadas Salientes</h1>
+            <p class="policy-intro">Nuestra plataforma implementa un sistema de control de acceso por niveles con verificación de identidad antes de otorgar privilegios de llamadas salientes:</p>
+            
+            <div class="policy-section">
+                <h3>Niveles de Acceso</h3>
+                
+                <div class="tier-card">
+                    <h4>Nivel 1 — Solo Entrante (predeterminado):</h4>
+                    <p>Todos los usuarios nuevos comienzan solo con llamadas entrantes. Pueden configurar agentes de voz de IA para recibir llamadas, pero no pueden iniciar llamadas salientes ni comprar números telefónicos. No se requiere verificación de identidad en este nivel.</p>
+                </div>
+                
+                <div class="tier-card">
+                    <h4>Nivel 2 — Llamadas Salientes Habilitadas (usuarios verificados):</h4>
+                    <p>Para desbloquear las llamadas salientes y la compra de números telefónicos, los usuarios deben completar un proceso de verificación KYC (Conozca a Su Cliente) obligatorio. Los requisitos varían según el tipo de usuario:</p>
+                    
+                    <div class="requirements">
+                        <div class="user-type">
+                            <h5>Para Personas Naturales:</h5>
+                            <ul>
+                                <li>RUT (Registro Único Tributario)</li>
+                                <li>Cédula de Ciudadanía — documento nacional de identidad emitido por el gobierno, validado contra la Registraduría Nacional del Estado Civil</li>
+                                <li>Comprobante de Domicilio — factura de servicios públicos reciente, estado de cuenta bancario o correspondencia oficial (emitida en los últimos 3 meses)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="user-type">
+                            <h5>Para Personas Jurídicas:</h5>
+                            <ul>
+                                <li>Certificado de Cámara y Comercio — certificado oficial de registro de la Cámara de Comercio (emitido en los últimos 30 días)</li>
+                                <li>Cédula de Ciudadanía del Representante Legal — documento nacional de identidad del representante legal, para verificar autorización para actuar en nombre del negocio</li>
+                                <li>Comprobante de Domicilio del Negocio — factura de servicios públicos reciente (electricidad, agua, gas o internet) que coincida con la dirección registrada del negocio</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <p class="policy-note">Todos los documentos son revisados manualmente antes de la aprobación. Las cuentas que fallen la verificación o presenten documentos fraudulentos serán baneadas permanentemente.</p>
+                </div>
+            </div>
+            
+            <div class="policy-section">
+                <h3>Controles de Compra de Números Telefónicos</h3>
+                <ul class="policy-list">
+                    <li>Solo los usuarios de Nivel 2 (verificados) pueden solicitar números telefónicos</li>
+                    <li>La asignación de números es gestionada directamente por nosotros — los usuarios no tienen acceso a la API del proveedor de telefonía</li>
+                    <li>Cada compra de número se registra con la identidad verificada del usuario solicitante</li>
+                    <li>Los números se provisionan según necesidad comercial legítima (los usuarios deben especificar el uso previsto)</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h3>Monitoreo Continuo</h3>
+                <ul class="policy-list">
+                    <li>Todas las campañas salientes requieren aprobación previa a través del panel de la plataforma antes de su ejecución</li>
+                    <li>El volumen de llamadas tiene límites de velocidad por cuenta según el nivel de verificación y el historial de uso</li>
+                    <li>Las cuentas que muestren patrones sospechosos (altas tasas de quejas, volúmenes anormales de llamadas, llamadas fuera de horas permitidas) se marcan automáticamente y se suspenden pendientes de revisión</li>
+                    <li>Mantenemos registros de auditoría completos que vinculan cada llamada saliente con la identidad de usuario verificada</li>
+                </ul>
+            </div>
+            
+            <div class="policy-section">
+                <h3>Revocación</h3>
+                <p>Los privilegios de llamadas salientes pueden ser revocados inmediatamente si:</p>
+                <ul class="policy-list">
+                    <li>Un usuario viola la Política de Uso Aceptable</li>
+                    <li>La tasa de quejas excede el umbral del 1%</li>
+                    <li>Se descubre que los documentos de identidad son fraudulentos o han expirado</li>
+                    <li>El usuario es reportado ante la SIC (Superintendencia de Industria y Comercio) por abuso en telecomunicaciones</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Universal Agents. Todos los derechos reservados. | Agentes de IA para WhatsApp</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
