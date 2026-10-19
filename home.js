@@ -110,10 +110,10 @@ function renderIntent() {
   document.querySelector('meta[name="theme-color"]').content =
     intent === 'ofrecer' ? '#173e35' : '#0d4b3d';
   document.title = (intent === 'ofrecer' ? 'Ofrecer servicios y crear agentes' : 'Contratar talento y agentes')
-    + ' | Multiplicador · Universal Agents';
+    + ' | Universal Agents 25';
   const subject = intent === 'ofrecer'
-    ? 'Quiero ofrecer servicios o crear agentes con Multiplicador'
-    : 'Quiero contratar con Multiplicador';
+    ? 'Quiero ofrecer servicios o crear agentes con Universal Agents 25'
+    : 'Quiero contratar con Universal Agents 25';
   document.querySelector('[data-intent-contact]').href =
     'mailto:soporte@universalagents25.com?subject=' + encodeURIComponent(subject);
 }

@@ -49,6 +49,7 @@ assert len(page.ids) == len(set(page.ids)), "Duplicate HTML IDs"
 assert set(page.references) <= set(page.ids), "Broken accessible label/control"
 assert set(page.projects) == {"contenido", "informes", "propuestas"}
 assert page.structured_data["@type"] == "WebSite"
+assert page.structured_data["name"] == "Universal Agents 25", "Use the complete brand name"
 
 for link in page.links:
     url = urlsplit(link)
@@ -67,8 +68,9 @@ for link in policy.links:
         assert url.fragment in page.ids, f"Broken policy return link: {link}"
 
 manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8-sig"))
+assert manifest["name"] == "Universal Agents 25", "Use the complete installed app name"
 for icon in manifest["icons"]:
-    data = (ROOT / icon["src"].lstrip("/")).read_bytes()
+    data = (ROOT / urlsplit(icon["src"]).path.lstrip("/")).read_bytes()
     assert data[:8] == b"\x89PNG\r\n\x1a\n", "Invalid PNG header"
     width, height = struct.unpack(">II", data[16:24])
     assert icon["sizes"] == f"{width}x{height}", "Incorrect icon dimensions"
