@@ -1,22 +1,22 @@
 @charset "UTF-8";
 /* Shared identity; the selected intention defines the workspace palette. */
 :root {
-  --paper:#f4f7fc;
-  --ink:#173e68;
-  --muted:#52657c;
-  --lime:#c6e1ff;
-  --line:#d7e1ee;
-  --accent:#315f92;
-  --ink-hover:#245481;
-  --lime-hover:#d9eaff;
-  --surface:#eaf0f8;
-  --surface-soft:#f8fafd;
-  --surface-accent:#e3edf9;
-  --accent-line:#9cbcdf;
-  --on-dark:#f3f7fc;
-  --muted-on-dark:#c0d2e8;
-  --line-on-dark:#436484;
-  --shadow-rgb:23,62,104;
+  --paper:#f1f8f4;
+  --ink:#0d4b3d;
+  --muted:#4e6b60;
+  --lime:#bce8d1;
+  --line:#d2e4da;
+  --accent:#216b50;
+  --ink-hover:#14634f;
+  --lime-hover:#d1f1e1;
+  --surface:#e5f2eb;
+  --surface-soft:#f8fcfa;
+  --surface-accent:#ddf1e6;
+  --accent-line:#8ccbb0;
+  --on-dark:#f1fbf6;
+  --muted-on-dark:#b8dacb;
+  --line-on-dark:#397c65;
+  --shadow-rgb:13,75,61;
 }
 body[data-intent="ofrecer"] {
   --paper:#f5f7f3;
@@ -1807,9 +1807,9 @@ h2>span {
   gap: 15px;
 }
 .intent-option {
-  --choice-ink: #173e68;
-  --choice-surface: #eaf1fa;
-  --choice-accent: #c6e1ff;
+  --choice-ink: #0d4b3d;
+  --choice-surface: #e5f2eb;
+  --choice-accent: #bce8d1;
   display: flex;
   align-items: center;
   gap: 15px;

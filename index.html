@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contratar talento y agentes | Multiplicador · Universal Agents</title>
   <meta name="description" content="Conoce las dos áreas de Multiplicador: contratar agentes o profesionales potenciados con IA, y ofrecer servicios o crear agentes. Plataforma en desarrollo.">
-  <meta name="theme-color" content="#173e68">
+  <meta name="theme-color" content="#0d4b3d">
   <link rel="canonical" href="https://universalagents25.com/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="images/icon-192.png">
@@ -24,8 +24,10 @@
   <meta name="twitter:title" content="Multiplicador · Contrata talento. Ofrece posibilidades.">
   <meta name="twitter:description" content="Dos áreas para contratar talento o agentes y ofrecer servicios o crearlos. Plataforma en desarrollo.">
   <meta name="twitter:image" content="https://universalagents25.com/images/og-image.png">
-  <link rel="stylesheet" href="home.css?v=2026.10.19.2">
-  <script src="home.js?v=2026.10.19.2" defer></script>
+  <link rel="stylesheet" href="home.css?v=2026.10.19.3">
+  <link rel="stylesheet" href="multiplier-scene.css?v=2026.10.19.3">
+  <script src="home.js?v=2026.10.19.3" defer></script>
+  <script src="multiplier-scene.js?v=2026.10.19.3" defer></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Universal Agents · Multiplicador","url":"https://universalagents25.com/","inLanguage":"es","description":"Presentación de Multiplicador, una plataforma de trabajo potenciado con IA en desarrollo."}</script>
 </head>
 <body data-intent="contratar">
@@ -80,6 +82,42 @@
         <div class="hero-actions"><a class="button button-dark" href="#plataforma"><span data-intent-copy="heroAction">Explora cómo contratar</span> <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a class="text-link" href="#como-funciona">Así funcionaría <span aria-hidden="true">↗</span></a></div>
         <p class="development-note"><span class="tiny-cross" aria-hidden="true">×</span> Dos áreas. Una cuenta prevista. Plataforma en desarrollo.</p>
       </div>
+
+      <figure class="multiplier-scene" aria-labelledby="multiplier-caption" data-paused="true">
+        <div class="multiplier-scene-heading"><span>EL EFECTO MULTIPLICADOR</span><span class="scene-concept">CONCEPTO VISUAL</span></div>
+        <div class="scene-world" id="multiplier-world" aria-hidden="true">
+          <div class="scene-halo"></div>
+          <div class="scene-floor"></div>
+          <div class="scene-ring scene-motion"></div>
+          <svg class="scene-connections" viewBox="0 0 500 420" preserveAspectRatio="none"><path d="M260 190 Q180 120 110 120"/><path d="M260 190 Q350 155 390 210"/><path d="M260 190 Q180 260 135 315"/><path class="connection-flow scene-motion" d="M260 190 Q180 120 110 120"/><path class="connection-flow scene-motion" d="M260 190 Q350 155 390 210"/><path class="connection-flow scene-motion" d="M260 190 Q180 260 135 315"/></svg>
+          <div class="cube-anchor anchor-person"><div class="scene-cube scene-motion cube-person"><span class="cube-face cube-front"><svg class="person-symbol" viewBox="0 0 48 48"><circle cx="24" cy="15" r="6"/><path d="M12 38v-5a12 12 0 0 1 24 0v5"/></svg></span><span class="cube-face cube-back"></span><span class="cube-face cube-right"></span><span class="cube-face cube-left"></span><span class="cube-face cube-top">×</span><span class="cube-face cube-bottom"></span></div></div>
+          <div class="human-label">TÚ <span>Tu criterio al frente</span></div>
+          <div class="cube-anchor anchor-agent-one"><div class="scene-cube scene-motion"><span class="cube-face cube-front"><svg class="agent-symbol" viewBox="0 0 24 24"><path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4Z"/></svg></span><span class="cube-face cube-back"></span><span class="cube-face cube-right"></span><span class="cube-face cube-left"></span><span class="cube-face cube-top"></span><span class="cube-face cube-bottom"></span></div></div>
+          <div class="cube-anchor anchor-agent-two"><div class="scene-cube scene-motion"><span class="cube-face cube-front"><svg class="agent-symbol" viewBox="0 0 24 24"><path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4Z"/></svg></span><span class="cube-face cube-back"></span><span class="cube-face cube-right"></span><span class="cube-face cube-left"></span><span class="cube-face cube-top"></span><span class="cube-face cube-bottom"></span></div></div>
+          <div class="cube-anchor anchor-agent-three"><div class="scene-cube scene-motion"><span class="cube-face cube-front"><svg class="agent-symbol" viewBox="0 0 24 24"><path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4Z"/></svg></span><span class="cube-face cube-back"></span><span class="cube-face cube-right"></span><span class="cube-face cube-left"></span><span class="cube-face cube-top"></span><span class="cube-face cube-bottom"></span></div></div>
+          <div class="scene-project project-one"><span>PROYECTO 01</span><strong>Investigar</strong><div><i></i><i></i><i></i></div></div>
+          <div class="scene-project project-two"><span>PROYECTO 02</span><strong>Preparar</strong><div><i></i><i></i><i></i></div></div>
+          <div class="scene-project project-three"><span>PROYECTO 03</span><strong>Revisar</strong><div><i></i><i></i><i></i></div></div>
+          <span class="agent-label label-one">AGENTE IA</span><span class="agent-label label-two">AGENTE IA</span><span class="agent-label label-three">AGENTE IA</span>
+        </div>
+        <figcaption id="multiplier-caption"><strong>Una persona. Muchas posibilidades.</strong><p>Tu experiencia conecta agentes de IA que te ayudan a avanzar en varios proyectos.</p></figcaption>
+        <button class="motion-toggle" id="motion-toggle" aria-pressed="false" aria-controls="multiplier-world" hidden><span class="motion-control-icon" aria-hidden="true"></span><span id="motion-label">Pausar animación</span></button>
+      </figure>
+    </section>
+
+    <div class="principles shell" aria-label="Principios de la plataforma"><p>Más capacidad.<br><strong>Con tu criterio al frente.</strong></p><span><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg> Sin barreras técnicas</span><span><svg class="icon" aria-hidden="true"><use href="#i-devices"/></svg> Pensada para móvil y PC</span><span><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Tú decides qué compartir</span></div>
+
+    <section class="platform section shell" id="plataforma" aria-labelledby="platform-title">
+      <span class="anchor-alias" id="servicios"></span>
+      <div class="section-heading"><p class="eyebrow" data-intent-copy="platformKicker">01 / TU TRABAJO, CON MÁS ALCANCE</p><h2 id="platform-title" data-intent-copy="platformTitle">Tu próxima herramienta<br><span>parte de lo que ya sabes.</span></h2><p data-intent-copy="platformDescription">La propuesta de Multiplicador es sencilla: acompañarte en el trabajo real, entender cómo lo haces y ayudarte a dar el siguiente paso.</p></div>
+      <div class="feature-layout">
+        <article class="feature feature-wide"><div class="feature-top"><span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg></span><span class="feature-number">01</span></div><h3 data-intent-copy="feature1Title">Varios proyectos.<br>Una visión clara.</h3><p data-intent-copy="feature1Description">Un lugar para entender qué está avanzando, qué necesita tu atención y qué puedes delegar.</p><div class="mini-projects" aria-hidden="true"><div><span class="project-dot dot-lilac"></span> <span data-intent-copy="mini1">Estudio creativo</span><span data-intent-copy="mini1State">Revisar borrador</span></div><div><span class="project-dot dot-peach"></span> <span data-intent-copy="mini2">Informe mensual</span><span data-intent-copy="mini2State">Organizar datos</span></div><div><span class="project-dot dot-green"></span> <span data-intent-copy="mini3">Nueva propuesta</span><span data-intent-copy="mini3State">Definir alcance</span></div></div></article>
+        <article class="feature"><div class="feature-top"><span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></span><span class="feature-number">02</span></div><h3 data-intent-copy="feature2Title">Ayuda que aprende<br>de tu experiencia.</h3><p data-intent-copy="feature2Description">Convertir los procesos que funcionan en asistentes reutilizables, con revisiones periódicas y resultados que puedas comprobar.</p><div class="learning-path" aria-hidden="true"><span data-intent-copy="learningInput">Tu forma de trabajar</span><span>↓</span><strong data-intent-copy="learningOutput">Una nueva habilidad</strong></div></article>
+        <article class="feature feature-tint"><div class="feature-top"><span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="feature-number">03</span></div><h3 data-intent-copy="feature3Title">Más contexto.<br>Siempre con permiso.</h3><p data-intent-copy="feature3Description">Elegir qué documentos y herramientas conectar, mantener cada cliente separado y decidir qué acciones necesitan tu aprobación.</p><div class="permission-example"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Preparar borrador</span><span>Permitido</span></div><div class="permission-example"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>Enviar al cliente</span><span>Con revisión</span></div></article>
+      </div>
+      <details class="product-tour">
+        <summary>Explora un ejemplo de esta área <span aria-hidden="true">+</span></summary>
+        <div class="tour-stage">
       <figure class="product-scene hire-scene" data-intent-panel="contratar" aria-label="Ejemplo ilustrativo del área para contratar agentes y profesionales">
         <div class="scene-orbit orbit-one"></div><div class="scene-orbit orbit-two"></div>
         <div class="hiring-preview">
@@ -123,18 +161,8 @@
         </div>
         <figcaption class="scene-caption"><span class="caption-icon"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span>La IA prepara.<br><strong>Tú tienes la última palabra.</strong></span></figcaption>
       </figure>
-    </section>
-
-    <div class="principles shell" aria-label="Principios de la plataforma"><p>Más capacidad.<br><strong>Con tu criterio al frente.</strong></p><span><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg> Sin barreras técnicas</span><span><svg class="icon" aria-hidden="true"><use href="#i-devices"/></svg> Pensada para móvil y PC</span><span><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Tú decides qué compartir</span></div>
-
-    <section class="platform section shell" id="plataforma" aria-labelledby="platform-title">
-      <span class="anchor-alias" id="servicios"></span>
-      <div class="section-heading"><p class="eyebrow" data-intent-copy="platformKicker">01 / TU TRABAJO, CON MÁS ALCANCE</p><h2 id="platform-title" data-intent-copy="platformTitle">Tu próxima herramienta<br><span>parte de lo que ya sabes.</span></h2><p data-intent-copy="platformDescription">La propuesta de Multiplicador es sencilla: acompañarte en el trabajo real, entender cómo lo haces y ayudarte a dar el siguiente paso.</p></div>
-      <div class="feature-layout">
-        <article class="feature feature-wide"><div class="feature-top"><span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg></span><span class="feature-number">01</span></div><h3 data-intent-copy="feature1Title">Varios proyectos.<br>Una visión clara.</h3><p data-intent-copy="feature1Description">Un lugar para entender qué está avanzando, qué necesita tu atención y qué puedes delegar.</p><div class="mini-projects" aria-hidden="true"><div><span class="project-dot dot-lilac"></span> <span data-intent-copy="mini1">Estudio creativo</span><span data-intent-copy="mini1State">Revisar borrador</span></div><div><span class="project-dot dot-peach"></span> <span data-intent-copy="mini2">Informe mensual</span><span data-intent-copy="mini2State">Organizar datos</span></div><div><span class="project-dot dot-green"></span> <span data-intent-copy="mini3">Nueva propuesta</span><span data-intent-copy="mini3State">Definir alcance</span></div></div></article>
-        <article class="feature"><div class="feature-top"><span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></span><span class="feature-number">02</span></div><h3 data-intent-copy="feature2Title">Ayuda que aprende<br>de tu experiencia.</h3><p data-intent-copy="feature2Description">Convertir los procesos que funcionan en asistentes reutilizables, con revisiones periódicas y resultados que puedas comprobar.</p><div class="learning-path" aria-hidden="true"><span data-intent-copy="learningInput">Tu forma de trabajar</span><span>↓</span><strong data-intent-copy="learningOutput">Una nueva habilidad</strong></div></article>
-        <article class="feature feature-tint"><div class="feature-top"><span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="feature-number">03</span></div><h3 data-intent-copy="feature3Title">Más contexto.<br>Siempre con permiso.</h3><p data-intent-copy="feature3Description">Elegir qué documentos y herramientas conectar, mantener cada cliente separado y decidir qué acciones necesitan tu aprobación.</p><div class="permission-example"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Preparar borrador</span><span>Permitido</span></div><div class="permission-example"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>Enviar al cliente</span><span>Con revisión</span></div></article>
-      </div>
+        </div>
+      </details>
     </section>
 
     <section class="process section" id="como-funciona" aria-labelledby="process-title">

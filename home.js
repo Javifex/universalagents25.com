@@ -108,7 +108,7 @@ function renderIntent() {
     ? 'Estás en el área para ofrecer servicios y crear agentes.'
     : 'Estás en el área para contratar agentes y profesionales.';
   document.querySelector('meta[name="theme-color"]').content =
-    intent === 'ofrecer' ? '#173e35' : '#173e68';
+    intent === 'ofrecer' ? '#173e35' : '#0d4b3d';
   document.title = (intent === 'ofrecer' ? 'Ofrecer servicios y crear agentes' : 'Contratar talento y agentes')
     + ' | Multiplicador · Universal Agents';
   const subject = intent === 'ofrecer'
