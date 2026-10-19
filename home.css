@@ -157,8 +157,16 @@ main {
 .brand-light {
   font-weight:430;
 }
-.brand-dot {
-  color:var(--accent);
+.brand-number {
+  display:inline-block;
+  margin-left:5px;
+  padding:2px 5px;
+  border-radius:5px;
+  background:var(--lime);
+  color:var(--ink);
+  font-size:.82em;
+  font-weight:750;
+  letter-spacing:-.5px;
 }
 .nav-panel {
   display:flex;

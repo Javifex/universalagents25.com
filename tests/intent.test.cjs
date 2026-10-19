@@ -73,7 +73,7 @@ function page(path = '/') {
 function expectIntent(page, intent) {
   assert.equal(page.body.dataset.intent, intent);
   assert.equal(page.theme.content, intent === 'ofrecer' ? '#173e35' : '#0d4b3d');
-  assert.ok(page.document.title.includes('Multiplicador'));
+  assert.ok(page.document.title.includes('Universal Agents 25'));
   assert.ok(page.document.title.toLowerCase().includes(intent));
   assert.ok(page.status.textContent.includes(intent));
   for (const copy of page.copies) {
