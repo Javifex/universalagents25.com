@@ -51,7 +51,7 @@ const intentContent = {
     "platformKicker": "01 / EL ÁREA PARA OFRECER Y CREAR",
     "platformTitle": "Convierte lo que sabes en nuevas posibilidades.",
     "platformDescription": "Tu experiencia es el punto de partida: presenta tus servicios, desarrolla agentes y organiza los proyectos que quieras llevar adelante.",
-    "feature1Title": "Ofrece tus servicios con IA.",
+    "feature1Title": "Ofrece tus servicios potenciados con IA",
     "feature1Description": "Da forma a tu propuesta profesional: qué sabes resolver, cómo te ayuda la IA y qué revisarás antes de entregar.",
     "mini1": "Estudio creativo",
     "mini1State": "Revisar borrador",
