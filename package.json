@@ -1,6 +1,6 @@
 {
   "name": "universal-agents-25",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Universal Agents 25: sitio público y base de datos Supabase preparada para desarrollo.",
   "scripts": {

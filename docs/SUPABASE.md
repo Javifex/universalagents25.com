@@ -4,7 +4,9 @@
 
 La revisión del 22 de octubre de 2026 encontró una web de presentación: no había base de datos, usuarios, sesiones, APIs, almacenamiento persistente ni datos operativos que migrar. Las demos de la portada son ilustrativas y el contacto abre correo.
 
-Se prepara una base nueva en Supabase. El proyecto remoto todavía no existe. Las migraciones y las pruebas se pueden revisar y ejecutar localmente; esto no habilita registro, contratación ni ejecución de agentes en la web publicada. El diseño y los scripts de la landing se conservan.
+El esquema ya está instalado en el proyecto remoto `PrimerTestUniversalAgents25`, referencia `ylyjlxpfbxdxebukdezt`, región `us-east-1`. Su URL API es `https://ylyjlxpfbxdxebukdezt.supabase.co`. Antes del despliegue se comprobó que no había tablas de aplicación, usuarios Auth ni archivos que migrar. Se aplicaron las migraciones y el seed mediante la integración autorizada de Supabase. Esto no habilita registro, contratación ni ejecución de agentes en la web publicada: el diseño y los scripts de la landing se conservan.
+
+La numeración de la migración inicial se sincroniza con la versión asignada por Supabase al instalarla. Se conserva su SQL original; así un futuro `db push` no intenta crear las mismas tablas otra vez con una versión distinta.
 
 Supabase es la fuente común para los datos de la plataforma:
 
@@ -83,18 +85,28 @@ npm run db:lint
 
 Los tres registros iniciales del catálogo —CV adaptado, entrevista y redacción profesional— se crean como borradores desactivados. No representan agentes integrados o disponibles para ejecutar.
 
-## Cuando se cree el proyecto remoto
+## Estado verificado y próximos pasos
 
-1. Crear el proyecto en Supabase y conservar su referencia. Definir las URLs Auth de producción y el envío de correo según el flujo que se vaya a habilitar.
+El despliegue del 22 de octubre de 2026 pasó 23 comprobaciones de estructura y permisos, incluidas diez tablas con RLS, 25 políticas de aplicación, ocho de Storage, dos buckets privados de 10 MiB y tres propuestas generales desactivadas. La API alojada respondió correctamente a siete comprobaciones: salud de Auth, perfiles y borradores ocultos, acceso anónimo denegado a ejecuciones y definiciones, reputación privada protegida y escrituras anónimas rechazadas. No se crearon cuentas ni archivos ficticios en el proyecto remoto.
+
+Las 110 comprobaciones de comportamiento siguen ejecutándose en PostgreSQL desechable y CI. No sustituyen las pruebas pendientes del registro por correo, recuperación de cuenta, subida y descarga de archivos reales ni ejecución de IA. La clave publicable se guarda únicamente en la configuración local ignorada; el paquete de código deja las claves vacías.
+
+El historial remoto y los archivos locales comparten las versiones `20261022142753_initial_schema` y `20261022143223_restrict_event_trigger_execution`. La segunda retira la ejecución directa de `public.rls_auto_enable()` a los roles de cliente cuando existe esa función administrada; se comprobó que su evento de activación automática de RLS sigue habilitado.
+
+La revisión de seguridad conserva dos avisos revisados, para acceso anónimo y autenticado, sobre `get_reputation`. Es una función privilegiada intencional: calcula el promedio completo sin exponer reseñas y comprueba dentro de la función que el perfil sea público o propio. La prueba HTTP rechazó la consulta no autorizada y las pruebas SQL cubren su agregado y privacidad. Referencias de los avisos: [ejecución anónima de SECURITY DEFINER](https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable) y [ejecución autenticada](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable). Los índices aparecen aún sin uso porque el proyecto acaba de instalarse; su utilidad se revisará con tráfico real.
+
+Para trabajar después desde la CLI con este proyecto existente:
+
+1. Definir las URLs Auth de producción y el envío de correo cuando se implemente el flujo de acceso. No sobrescribir esos ajustes con la configuración de desarrollo local.
 2. Autenticarse y vincular esta carpeta desde la CLI, sin escribir contraseñas en comandos versionados:
 
 ```powershell
 npx supabase login
-npx supabase link --project-ref TU_REFERENCIA
+npx supabase link --project-ref ylyjlxpfbxdxebukdezt
 npm run db:plan
 ```
 
-3. Revisar el plan. Aplicar las migraciones con `npx supabase db push`. El seed no se envía por defecto; `npx supabase db push --include-seed` lo incluye una vez revisados sus borradores.
+3. Revisar el plan. La migración inicial ya está aplicada; `npx supabase db push` se reserva para nuevas migraciones revisadas. El seed ya fue aplicado y es idempotente; no representa agentes disponibles.
 4. Copiar `.env.example` a `.env` y completar URL y clave publicable para el futuro cliente. La clave secreta es exclusivamente del backend. `.env` está ignorado por Git y no forma parte de los paquetes de publicación.
 5. Implementar y probar el flujo de acceso y las APIs privilegiadas antes de conectar formularios o habilitar escrituras en la portada. Una landing estática no lee `.env` ni protege operaciones usando solo JavaScript.
 
