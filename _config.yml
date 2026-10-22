@@ -1,0 +1,9 @@
+exclude:
+  - docs/
+  - supabase/
+  - tests/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - README.md
+  - .env.example
