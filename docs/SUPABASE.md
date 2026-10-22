@@ -21,6 +21,8 @@ PGlite es solo el motor PostgreSQL efímero de las pruebas locales. No es una se
 
 ## Modelo inicial
 
+El [registro de estructura](DATABASE_STRUCTURE.md) conserva el diccionario de campos, relaciones, índices, permisos e historial. Actualizarlo después de cada migración aplicada y regenerar su edición de lectura con una nueva versión documental.
+
 | Tabla | Qué conserva | Acceso del cliente |
 | --- | --- | --- |
 | `profiles` | Perfil de una identidad Auth; nombre y biografía, sin email ni secretos. | Propio; lectura pública solo cuando su titular publica el perfil. |

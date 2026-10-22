@@ -15,6 +15,7 @@ Supabase será la fuente común de identidad, datos y archivos privados. El esqu
 - `supabase/migrations/`: tablas, relaciones, políticas y funciones.
 - `supabase/seed.sql`: catálogo inicial como borradores desactivados.
 - [Guía de preparación y conexión](docs/SUPABASE.md).
+- [Registro de la estructura de la base de datos](docs/DATABASE_STRUCTURE.md): campos, relaciones, permisos e historial de cambios.
 
 ## Verificación
 
