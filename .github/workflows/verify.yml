@@ -1,0 +1,35 @@
+name: Verify site and Supabase foundation
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.x'
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - name: Start Supabase PostgreSQL
+        run: npm run db:start
+      - name: Apply migrations and seed
+        run: npm run db:reset
+      - name: Check permissions against real Supabase schemas
+        run: docker exec -i supabase_db_universal-agents-25 psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/database/foundation.sql
+      - run: npm run db:lint
+      - name: Stop disposable database
+        if: always()
+        run: npx supabase stop --no-backup
