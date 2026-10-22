@@ -6,7 +6,7 @@ Sitio: https://universalagents25.com/
 
 ## Estado
 
-La web publicada es una presentación estática. La base Supabase está preparada en código; todavía no existe un proyecto remoto conectado, ni están habilitados registro, contratación o ejecución real de agentes.
+La web publicada es una presentación estática. El esquema Supabase ya está instalado en `PrimerTestUniversalAgents25` (`ylyjlxpfbxdxebukdezt`), con los tres agentes iniciales en borrador. La interfaz todavía no tiene registro, contratación ni ejecución real de agentes.
 
 ## Base de datos
 
