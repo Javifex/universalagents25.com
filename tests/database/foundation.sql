@@ -323,7 +323,18 @@ SELECT public.ua25_test_assert((SELECT count(*) FROM storage.objects WHERE bucke
   'member can read project context only after the uploader consent');
 SELECT public.ua25_test_assert((SELECT count(*) FROM storage.objects WHERE bucket_id='account-files')=0,
   'project consent never exposes account files');
+INSERT INTO storage.objects(bucket_id,name,owner_id) VALUES
+ ('project-files','20000000-0000-4000-8000-000000000001/own-delete.txt','10000000-0000-4000-8000-000000000002');
+SELECT public.ua25_test_expect_error($sql$DELETE FROM storage.objects WHERE bucket_id='project-files'$sql$,
+  '42501','direct Storage metadata deletion is blocked outside the API context');
+-- Match Supabase's own test helper, only for rolled-back metadata fixtures.
+-- RLS and triggers remain enabled; no real object bytes are created/deleted.
+-- https://github.com/supabase/storage/blob/master/src/test/utils/storage.ts
+SET LOCAL storage.allow_delete_query='true';
 DELETE FROM storage.objects WHERE bucket_id='project-files';
+SET LOCAL storage.allow_delete_query='false';
+SELECT public.ua25_test_assert((SELECT count(*) FROM storage.objects WHERE name='20000000-0000-4000-8000-000000000001/own-delete.txt')=0,
+  'Storage API context allows deleting the caller own metadata');
 RESET ROLE;
 SELECT public.ua25_test_assert((SELECT count(*) FROM storage.objects WHERE bucket_id='project-files')=1,
   'read permission does not let a peer delete an uploader file');
@@ -344,11 +355,35 @@ RESET ROLE;
 INSERT INTO public.projects(id,contractor_id,executor_id,title,status) VALUES
  ('20000000-0000-4000-8000-000000000004','10000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000002','Draft reassignment','draft'),
  ('20000000-0000-4000-8000-000000000005','10000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000002','Cancelled engagement','cancelled');
+SET LOCAL ROLE authenticated;
+SET LOCAL request.jwt.claim.sub='10000000-0000-4000-8000-000000000001';
 INSERT INTO public.project_consents(project_id,user_id,purpose,granted) VALUES
- ('20000000-0000-4000-8000-000000000004','10000000-0000-4000-8000-000000000001','context',true),
+ ('20000000-0000-4000-8000-000000000004','10000000-0000-4000-8000-000000000001','context',false);
+SELECT public.ua25_test_expect_error($sql$UPDATE public.project_consents SET granted=true WHERE project_id='20000000-0000-4000-8000-000000000004' AND purpose='context'$sql$,
+  '42501','a member cannot grant draft consent through an update');
+SELECT public.ua25_test_expect_error($sql$INSERT INTO public.project_consents(project_id,user_id,purpose,granted) VALUES ('20000000-0000-4000-8000-000000000004','10000000-0000-4000-8000-000000000001','learning',true)$sql$,
+  '42501','a member cannot grant draft consent through an insert');
+SELECT public.ua25_test_assert((SELECT NOT granted FROM public.project_consents WHERE project_id='20000000-0000-4000-8000-000000000004' AND purpose='context'),
+  'draft consent remains ungranted after both denied paths');
+RESET ROLE;
+-- Privileged legacy data must not enable sharing during a mutable draft.
+UPDATE public.project_consents SET granted=true WHERE project_id='20000000-0000-4000-8000-000000000004' AND purpose='context';
+INSERT INTO public.project_consents(project_id,user_id,purpose,granted) VALUES
  ('20000000-0000-4000-8000-000000000004','10000000-0000-4000-8000-000000000002','learning',true);
 INSERT INTO storage.objects(bucket_id,name,owner_id) VALUES
  ('project-files','20000000-0000-4000-8000-000000000004/draft.pdf','10000000-0000-4000-8000-000000000001');
+SET LOCAL ROLE authenticated;
+SET LOCAL request.jwt.claim.sub='10000000-0000-4000-8000-000000000002';
+SELECT public.ua25_test_assert((SELECT count(*) FROM storage.objects WHERE name='20000000-0000-4000-8000-000000000004/draft.pdf')=0,
+  'draft peers cannot read a file even with privileged granted consent');
+SET LOCAL request.jwt.claim.sub='10000000-0000-4000-8000-000000000001';
+SELECT public.ua25_test_assert((SELECT count(*) FROM storage.objects WHERE name='20000000-0000-4000-8000-000000000004/draft.pdf')=1,
+  'draft uploader can still read their own private file');
+UPDATE public.project_consents SET granted=false WHERE project_id='20000000-0000-4000-8000-000000000004' AND purpose='context';
+SELECT public.ua25_test_assert((SELECT NOT granted FROM public.project_consents WHERE project_id='20000000-0000-4000-8000-000000000004' AND purpose='context'),
+  'a member can always revoke their own draft consent');
+RESET ROLE;
+UPDATE public.project_consents SET granted=true WHERE project_id='20000000-0000-4000-8000-000000000004' AND purpose='context';
 SET LOCAL ROLE service_role;
 SELECT public.ua25_test_expect_error($sql$UPDATE public.projects SET executor_id='10000000-0000-4000-8000-000000000004' WHERE id='20000000-0000-4000-8000-000000000001'$sql$,
   '23514','active engagement parties cannot be silently replaced');
@@ -364,10 +399,20 @@ SELECT public.ua25_test_assert((SELECT count(*) FROM public.project_consents WHE
   'draft reassignment revokes context and learning consents of all prior parties');
 -- Simulate stale privileged data to independently check the Storage guard.
 UPDATE public.project_consents SET granted=true WHERE project_id='20000000-0000-4000-8000-000000000004' AND purpose='context';
+SET LOCAL ROLE service_role;
+UPDATE public.projects SET status='active' WHERE id='20000000-0000-4000-8000-000000000004';
+RESET ROLE;
 SET LOCAL ROLE authenticated;
 SET LOCAL request.jwt.claim.sub='10000000-0000-4000-8000-000000000002';
 SELECT public.ua25_test_assert((SELECT count(*) FROM storage.objects WHERE name='20000000-0000-4000-8000-000000000004/draft.pdf')=0,
-  'even a stale consent cannot share a departed uploader file');
+  'after activation even a stale consent cannot share a departed uploader file');
+INSERT INTO public.project_consents(project_id,user_id,purpose,granted) VALUES
+ ('20000000-0000-4000-8000-000000000002','10000000-0000-4000-8000-000000000002','learning',true),
+ ('20000000-0000-4000-8000-000000000005','10000000-0000-4000-8000-000000000002','context',true);
+SELECT public.ua25_test_assert((SELECT count(*) FROM public.project_consents
+  WHERE project_id IN ('20000000-0000-4000-8000-000000000002','20000000-0000-4000-8000-000000000005')
+    AND user_id='10000000-0000-4000-8000-000000000002' AND granted)=2,
+  'members can explicitly grant consent after completed or cancelled parties freeze');
 RESET ROLE;
 
 SELECT count(*)::integer AS assertions_passed FROM database_test_results;

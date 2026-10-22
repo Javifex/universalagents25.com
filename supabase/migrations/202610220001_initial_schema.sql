@@ -167,6 +167,17 @@ returns boolean language sql stable security definer set search_path = '' as $$
   );
 $$;
 
+-- Granting consent starts after participants are frozen, so draft reassignment cannot inherit it.
+create function private.can_set_project_consent(p_project_id uuid, p_granted boolean)
+returns boolean language sql stable security definer set search_path = '' as $$
+  select exists (
+    select 1 from public.projects p
+    where p.id = p_project_id
+      and (p.contractor_id = (select auth.uid()) or p.executor_id = (select auth.uid()))
+      and (not p_granted or p.status <> 'draft')
+  );
+$$;
+
 create function private.can_create_review(p_project_id uuid, p_reviewer_id uuid, p_reviewed_id uuid, p_role text)
 returns boolean language sql stable security definer set search_path = '' as $$
   select p_reviewer_id = (select auth.uid()) and exists (
@@ -194,18 +205,20 @@ returns boolean language sql stable security definer set search_path = '' as $$
     where p.id::text = p_project_path
       and (p.contractor_id = (select auth.uid()) or p.executor_id = (select auth.uid()))
       and (p_uploader_id = p.contractor_id::text or p_uploader_id = p.executor_id::text)
-      and (p_uploader_id = (select auth.uid())::text or exists (
+      and (p_uploader_id = (select auth.uid())::text or (p.status <> 'draft' and exists (
         select 1 from public.project_consents c
         where c.project_id = p.id and c.user_id::text = p_uploader_id
           and c.purpose = 'context' and c.granted
-      ))
+      )))
   );
 $$;
 
 revoke all on function private.owns_offering(uuid), private.is_project_member(uuid),
+  private.can_set_project_consent(uuid, boolean),
   private.can_create_review(uuid, uuid, uuid, text), private.is_project_path_member(text),
   private.can_read_project_file(text, text) from public, anon, authenticated;
 grant execute on function private.owns_offering(uuid), private.is_project_member(uuid),
+  private.can_set_project_consent(uuid, boolean),
   private.can_create_review(uuid, uuid, uuid, text), private.is_project_path_member(text),
   private.can_read_project_file(text, text) to authenticated;
 
@@ -325,10 +338,10 @@ grant insert (project_id, user_id, purpose, granted), update (granted) on public
 create policy project_consents_read_members on public.project_consents for select to authenticated
   using (private.is_project_member(project_id));
 create policy project_consents_insert_own on public.project_consents for insert to authenticated
-  with check (user_id = (select auth.uid()) and private.is_project_member(project_id));
+  with check (user_id = (select auth.uid()) and private.can_set_project_consent(project_id, granted));
 create policy project_consents_update_own on public.project_consents for update to authenticated
   using (user_id = (select auth.uid()) and private.is_project_member(project_id))
-  with check (user_id = (select auth.uid()) and private.is_project_member(project_id));
+  with check (user_id = (select auth.uid()) and private.can_set_project_consent(project_id, granted));
 
 grant select on public.self_evaluations to authenticated;
 grant insert (owner_id, project_id, notes), update (notes) on public.self_evaluations to authenticated;

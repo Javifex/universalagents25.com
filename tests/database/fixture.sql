@@ -40,6 +40,21 @@ CREATE FUNCTION storage.foldername(path text) RETURNS text[] LANGUAGE sql IMMUTA
     THEN parts[1:array_length(parts, 1)-1] ELSE ARRAY[]::text[] END
   FROM (SELECT string_to_array(path, '/') AS parts) AS split
 $$;
+-- Mirror Storage's statement guard so local tests must opt into its API deletion
+-- context too. This does not emulate deleting the actual object bytes.
+-- https://github.com/supabase/storage/blob/master/migrations/tenant/0055-prevent-direct-deletes.sql
+CREATE FUNCTION storage.protect_delete() RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+  IF current_setting('storage.allow_delete_query', true) IS DISTINCT FROM 'true' THEN
+    RAISE EXCEPTION 'Storage metadata deletion requires its API context' USING ERRCODE='42501';
+  END IF;
+  RETURN NULL;
+END;
+$$;
+CREATE TRIGGER protect_objects_delete BEFORE DELETE ON storage.objects
+  FOR EACH STATEMENT EXECUTE FUNCTION storage.protect_delete();
+CREATE TRIGGER protect_buckets_delete BEFORE DELETE ON storage.buckets
+  FOR EACH STATEMENT EXECUTE FUNCTION storage.protect_delete();
 ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
 GRANT USAGE ON SCHEMA storage TO anon, authenticated, service_role;
 GRANT ALL ON storage.buckets, storage.objects TO service_role;

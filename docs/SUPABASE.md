@@ -34,7 +34,7 @@ PGlite es solo el motor PostgreSQL efímero de las pruebas locales. No es una se
 
 No se introducen pagos, equipos empresariales ni facturación hasta definir sus flujos. Las credenciales de modelos y herramientas pertenecen al entorno del backend o a un almacén de secretos; no a los perfiles, las definiciones públicas ni los archivos del cliente.
 
-Las partes del encargo quedan fijas al activarlo. Un cambio de participantes en un borrador revoca sus consentimientos anteriores. Los estados completado y cancelado son terminales. Las relaciones conservan el historial: antes de habilitar la eliminación de cuentas habrá que definir retención, anonimización y retirada de archivos; borrar directamente una identidad con encargos u ofertas relacionados puede quedar bloqueado.
+Las partes del encargo quedan fijas al activarlo. En un borrador no se puede conceder acceso compartido ni aprendizaje; los permisos se conceden una vez fijados los participantes, y se pueden revocar. Un cambio de participantes en un borrador revoca sus consentimientos anteriores. Los estados completado y cancelado son terminales. Las relaciones conservan el historial: antes de habilitar la eliminación de cuentas habrá que definir retención, anonimización y retirada de archivos; borrar directamente una identidad con encargos u ofertas relacionados puede quedar bloqueado.
 
 ## Calificaciones separadas
 
@@ -56,6 +56,8 @@ Los buckets `account-files` y `project-files` son privados, con límite inicial 
 - El consentimiento para trabajar con contexto y el consentimiento para aprendizaje son decisiones diferentes. El worker futuro deberá comprobar la autorización vigente antes de leer material para aprender o proponer una ayuda. Aprobar una propuesta no publica ni ejecuta un agente automáticamente.
 
 RLS y los permisos de columnas protegen las operaciones de los clientes. La clave secreta del servidor omite RLS: por eso las operaciones privilegiadas deberán autenticar al solicitante, comprobar sus permisos y aplicar límites antes de usarla. Una clave pública no sustituye estas políticas.
+
+Una subida administrativa no asigna automáticamente el archivo al titular del encargo. El worker deberá subir como el usuario autorizado o usar un flujo de servidor que valide y asigne expresamente la propiedad; un archivo sin propietario queda inaccesible para los clientes con estas políticas.
 
 ## Preparación local
 
