@@ -4,7 +4,7 @@
 
 La revisión del 22 de octubre de 2026 encontró una web de presentación: no había base de datos, usuarios, sesiones, APIs, almacenamiento persistente ni datos operativos que migrar. Las demos de la portada son ilustrativas y el contacto abre correo.
 
-El esquema ya está instalado en el proyecto remoto `PrimerTestUniversalAgents25`, referencia `ylyjlxpfbxdxebukdezt`, región `us-east-1`. Su URL API es `https://ylyjlxpfbxdxebukdezt.supabase.co`. Antes del despliegue se comprobó que no había tablas de aplicación, usuarios Auth ni archivos que migrar. Se aplicaron las migraciones y el seed mediante la integración autorizada de Supabase. Esto no habilita registro, contratación ni ejecución de agentes en la web publicada: el diseño y los scripts de la landing se conservan.
+El esquema ya está instalado en el proyecto remoto `PrimerTestUniversalAgents25`, referencia `ylyjlxpfbxdxebukdezt`, región `us-east-1`. Su URL API es `https://ylyjlxpfbxdxebukdezt.supabase.co`. Antes del despliegue se comprobó que no había tablas de aplicación, usuarios Auth ni archivos que migrar. Se aplicaron las migraciones y el seed mediante la integración autorizada de Supabase. La versión web 0.2.0 añade el cliente de registro y perfiles descrito al final de esta guía. La contratación y la ejecución de agentes siguen pendientes.
 
 La numeración de la migración inicial se sincroniza con la versión asignada por Supabase al instalarla. Se conserva su SQL original; así un futuro `db push` no intenta crear las mismas tablas otra vez con una versión distinta.
 
@@ -91,7 +91,7 @@ Los tres registros iniciales del catálogo —CV adaptado, entrevista y redacci�
 
 El despliegue del 22 de octubre de 2026 pasó 23 comprobaciones de estructura y permisos, incluidas diez tablas con RLS, 25 políticas de aplicación, ocho de Storage, dos buckets privados de 10 MiB y tres propuestas generales desactivadas. La API alojada respondió correctamente a siete comprobaciones: salud de Auth, perfiles y borradores ocultos, acceso anónimo denegado a ejecuciones y definiciones, reputación privada protegida y escrituras anónimas rechazadas. No se crearon cuentas ni archivos ficticios en el proyecto remoto.
 
-Las 110 comprobaciones de comportamiento siguen ejecutándose en PostgreSQL desechable y CI. No sustituyen las pruebas pendientes del registro por correo, recuperación de cuenta, subida y descarga de archivos reales ni ejecución de IA. La clave publicable se guarda únicamente en la configuración local ignorada; el paquete de código deja las claves vacías.
+Las 110 comprobaciones de comportamiento siguen ejecutándose en PostgreSQL desechable y CI. No sustituyen las pruebas del registro por correo, recuperación de cuenta, subida y descarga de archivos reales ni ejecución de IA. Desde 0.2.0, `cuenta.js` contiene la URL y la clave publicable del cliente: son configuración pública, protegida por RLS y permisos de columnas. Nunca debe incluir una clave secreta o `service_role`.
 
 El historial remoto y los archivos locales comparten las versiones `20261022142753_initial_schema` y `20261022143223_restrict_event_trigger_execution`. La segunda retira la ejecución directa de `public.rls_auto_enable()` a los roles de cliente cuando existe esa función administrada; se comprobó que su evento de activación automática de RLS sigue habilitado.
 
@@ -109,10 +109,29 @@ npm run db:plan
 ```
 
 3. Revisar el plan. La migración inicial ya está aplicada; `npx supabase db push` se reserva para nuevas migraciones revisadas. El seed ya fue aplicado y es idempotente; no representa agentes disponibles.
-4. Copiar `.env.example` a `.env` y completar URL y clave publicable para el futuro cliente. La clave secreta es exclusivamente del backend. `.env` está ignorado por Git y no forma parte de los paquetes de publicación.
-5. Implementar y probar el flujo de acceso y las APIs privilegiadas antes de conectar formularios o habilitar escrituras en la portada. Una landing estática no lee `.env` ni protege operaciones usando solo JavaScript.
+4. `.env.example` sirve para herramientas locales y el futuro backend. La web estática no lee `.env`; su configuración pública está en `cuenta.js`. La clave secreta es exclusivamente del backend. `.env` está ignorado por Git y no forma parte de los paquetes de publicación.
+5. Verificar el flujo de acceso de la sección siguiente antes de considerarlo operativo. Las APIs privilegiadas para contratación y ejecución siguen pendientes; el cliente actual solo modifica el perfil propio bajo RLS.
 
 No ejecutar `db reset --linked` sobre producción. Para cambios posteriores, crear nuevas migraciones y revisar el plan antes de aplicarlo; no editar una migración ya desplegada.
+
+## Registro web 0.2.0
+
+`cuenta.html` usa el SDK oficial bloqueado y servido localmente. Ofrece registro con nombre, correo y contraseña de al menos 12 caracteres; inicio/cierre de sesión en este navegador; reenvío de confirmación; recuperación de contraseña; edición del nombre, biografía y visibilidad del perfil propio. El trigger existente crea el perfil al dar de alta la identidad: el navegador no lo inserta ni hace `upsert`. La sesión se verifica con `getUser()` antes de cargar el perfil y el guardado exige una fila devuelta por la API.
+
+La confirmación usa el flujo de navegador `implicit` admitido por Supabase, para abrir el enlace también en otro navegador. El SDK procesa el fragmento, la página limpia la URL y usa `referrer=no-referrer`. No hay métricas ni scripts externos en esta página; su CSP limita conexiones al proyecto Supabase. La sesión persiste en el almacenamiento del navegador; en equipos compartidos hay que cerrar sesión. Los perfiles empiezan privados. Publicarlos hace visibles UUID, nombre, biografía y fecha, nunca el correo de Auth.
+
+Configurar en el proyecto remoto, sin ejecutar `config push` con la configuración local:
+
+1. Auth > URL Configuration: `Site URL = https://universalagents25.com/cuenta.html` y añadir exactamente esa URL a `Redirect URLs`. Para pruebas locales, añadir `http://127.0.0.1:4173/cuenta.html` solo al entorno de desarrollo.
+2. Mantener registro por correo habilitado, confirmación obligatoria y acceso anónimo deshabilitado.
+3. Configurar SMTP de un remitente autorizado. El servidor de correo predeterminado de Supabase solo permite destinatarios del equipo y no sirve para altas públicas. No deshabilitar la confirmación para evitar este requisito. Las credenciales SMTP solo se guardan en Supabase.
+4. Probar con un correo controlado: registrarse, abrir la confirmación, editar perfil, recargar, cerrar sesión, iniciar sesión y recuperar la contraseña. Comprobar además un enlace caducado y un correo ya registrado. No registrar contraseñas ni tokens en capturas o reportes.
+
+Las pruebas automatizadas usan SDK simulado para comprobar estados, payloads, errores, confirmación sin sesión y carreras de identidad; las 110 comprobaciones SQL validan permisos con PostgreSQL. No afirman que SMTP o la configuración remota de redirecciones estén activos: eso requiere la prueba de aceptación por correo.
+
+El 23 de octubre de 2026 se corrigió en el panel remoto `Site URL` a `https://universalagents25.com/cuenta.html` y se añadió exactamente esa URL a la lista de redirecciones, sin comodines ni localhost. Una solicitud con un token deliberadamente inválido confirmó HTTP 303 hacia la página de cuenta con el error esperado `otp_expired`; antes volvía a `localhost:3000`. No se creó una cuenta ni se envió correo en esa comprobación. Se comprobó que SMTP personalizado está desactivado: configurar un remitente y verificar el recorrido por correo sigue siendo requisito para el registro público.
+
+Referencias: [registro y confirmación](https://supabase.com/docs/reference/javascript/auth-signup), [recuperación de contraseña](https://supabase.com/docs/reference/javascript/auth-resetpasswordforemail), [SMTP](https://supabase.com/docs/guides/auth/auth-smtp).
 
 ## Referencias técnicas
 
