@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tu cuenta | Universal Agents 25</title>
+  <meta name="description" content="Crea tu cuenta en Universal Agents 25, confirma tu correo y prepara tu perfil. Una cuenta para contratar y ofrecer.">
+  <meta name="theme-color" content="#0d4b3d">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://ylyjlxpfbxdxebukdezt.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <link rel="canonical" href="https://universalagents25.com/cuenta.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2026.10.19.4">
+  <link rel="stylesheet" href="home.css?v=2026.10.19.4">
+  <link rel="stylesheet" href="cuenta.css?v=0.2.0">
+  <script src="vendor/supabase-2.118.0.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" defer></script>
+  <script src="cuenta.js?v=0.2.0" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <nav class="shell navigation account-navigation" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Universal Agents 25, inicio"><span class="brand-mark" aria-hidden="true">×</span><span>universal<span class="brand-light">agents</span><span class="brand-number">25</span></span></a>
+      <a class="account-back" href="index.html"><span aria-hidden="true">←</span> Volver al inicio</a>
+    </nav>
+  </header>
+
+  <main class="shell account-layout" id="contenido">
+    <section class="account-welcome" aria-labelledby="account-welcome-title">
+      <p class="eyebrow">UNA CUENTA, DOS POSIBILIDADES</p>
+      <h2 id="account-welcome-title">Tu próximo paso<br>empieza aquí.</h2>
+      <p class="account-description">Crea tu cuenta para preparar tu perfil y acceder al mismo espacio cuando quieras contratar talento o dar a conocer lo que haces.</p>
+      <ul class="account-benefits">
+        <li><span aria-hidden="true">01</span><div><strong>Confirma tu correo</strong><p>Te enviaremos un enlace para activar el acceso.</p></div></li>
+        <li><span aria-hidden="true">02</span><div><strong>Prepara tu perfil</strong><p>Empieza con tu nombre y añade una breve presentación.</p></div></li>
+        <li><span aria-hidden="true">03</span><div><strong>Elige qué compartir</strong><p>Tu perfil es privado al crearlo. Tú decides si lo haces público.</p></div></li>
+      </ul>
+      <p class="account-development"><strong>Estamos construyendo la plataforma.</strong> El registro y tu perfil son el primer paso; contratar servicios y ejecutar agentes sigue en desarrollo.</p>
+    </section>
+
+    <div class="account-card">
+      <p id="account-status" class="account-status" role="status" aria-live="polite" tabindex="-1">Cargando acceso…</p>
+
+      <section id="auth-area" aria-labelledby="auth-title">
+        <h1 id="auth-title">Crea tu cuenta</h1>
+        <p id="auth-intro" class="account-intro">Una sola cuenta para contratar y ofrecer. Empieza con tu correo.</p>
+        <form id="auth-form" method="post">
+          <fieldset id="auth-fields" disabled>
+            <legend class="visually-hidden">Datos de acceso</legend>
+            <div class="account-field" id="name-field">
+              <label for="display-name">Nombre para tu perfil</label>
+              <input id="display-name" name="display_name" type="text" maxlength="100" autocomplete="nickname" required>
+            </div>
+            <div class="account-field" id="email-field">
+              <label for="email">Correo electrónico</label>
+              <input id="email" name="email" type="email" maxlength="254" autocomplete="email" autocapitalize="none" spellcheck="false" required>
+            </div>
+            <div class="account-field" id="password-field">
+              <label for="password">Contraseña</label>
+              <input id="password" name="password" type="password" minlength="12" autocomplete="new-password" aria-describedby="password-help" required>
+              <p class="account-help" id="password-help">Usa al menos 12 caracteres y una contraseña que no utilices en otros sitios.</p>
+            </div>
+            <button class="button button-dark account-submit" id="auth-submit" type="submit">Crear cuenta</button>
+          </fieldset>
+        </form>
+        <button class="account-text-button" id="resend-confirmation" type="button" hidden>Reenviar correo de confirmación</button>
+        <div class="account-modes" role="group" aria-label="Opciones de acceso">
+          <button type="button" data-mode="signup" aria-pressed="true">Crear cuenta</button>
+          <button type="button" data-mode="login" aria-pressed="false">Iniciar sesión</button>
+          <button type="button" data-mode="forgot" aria-pressed="false">Olvidé mi contraseña</button>
+        </div>
+      </section>
+
+      <section id="profile-area" aria-labelledby="profile-title" hidden>
+        <h2 id="profile-title">Mi cuenta</h2>
+        <p class="account-intro" id="account-email"></p>
+        <form id="profile-form" method="post">
+          <fieldset id="profile-fields" disabled>
+            <legend class="visually-hidden">Tu perfil</legend>
+            <div class="account-field">
+              <label for="profile-name">Nombre para tu perfil</label>
+              <input id="profile-name" name="display_name" type="text" maxlength="100" autocomplete="nickname" required>
+            </div>
+            <div class="account-field">
+              <label for="profile-bio">Sobre ti <span class="account-optional">(opcional)</span></label>
+              <textarea id="profile-bio" name="bio" rows="4" maxlength="2000" aria-describedby="profile-bio-help"></textarea>
+              <p class="account-help" id="profile-bio-help">Una breve presentación de hasta 2.000 caracteres.</p>
+            </div>
+            <div class="account-visibility">
+              <label for="profile-public"><input id="profile-public" name="is_public" type="checkbox" aria-describedby="profile-public-help"><span>Hacer público mi perfil</span></label>
+              <p class="account-help" id="profile-public-help">Al activarlo, cualquier persona podrá consultar tu nombre, presentación y fecha de registro. Tu correo no se muestra en el perfil público.</p>
+            </div>
+            <button class="button button-dark account-submit" type="submit">Guardar perfil</button>
+          </fieldset>
+        </form>
+        <div class="account-destinations" aria-label="Explorar las áreas de la plataforma">
+          <a id="hire-link" href="index.html?intencion=contratar">Quiero contratar <span aria-hidden="true">↗</span></a>
+          <a id="offer-link" href="index.html?intencion=ofrecer">Quiero ofrecer o crear <span aria-hidden="true">↗</span></a>
+        </div>
+        <button class="account-text-button" id="sign-out" type="button">Cerrar sesión</button>
+      </section>
+
+      <p class="account-data-note">Usamos tu correo para identificar tu cuenta y enviarte enlaces de acceso. Tu nombre y presentación forman tu perfil. <a href="privacidad-cuenta.html">Consulta la privacidad de tu cuenta.</a></p>
+      <noscript><p class="account-noscript">Activa JavaScript para crear tu cuenta o iniciar sesión. Si necesitas ayuda, escribe a <a href="mailto:soporte@universalagents25.com">soporte@universalagents25.com</a>.</p></noscript>
+    </div>
+  </main>
+
+  <footer class="shell account-footer"><span>© 2026 Universal Agents 25</span><a href="mailto:soporte@universalagents25.com">¿Necesitas ayuda?</a></footer>
+</body>
+</html>

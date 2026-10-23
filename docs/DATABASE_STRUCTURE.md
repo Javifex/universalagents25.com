@@ -2,7 +2,7 @@
 
 Registro de referencia 1.0.0. Fecha de corte: 22 de octubre de 2026. Código de referencia 0.1.1.
 
-Este registro documenta la estructura instalada en Supabase y conserva el historial necesario para revisarla con cada migración. Reúne tablas, campos, relaciones, índices, permisos y reglas de trabajo. La base está instalada; el registro, la contratación y la ejecución de agentes desde la web siguen pendientes.
+Este registro documenta la estructura instalada en Supabase y conserva el historial necesario para revisarla con cada migración. Reúne tablas, campos, relaciones, índices, permisos y reglas de trabajo. La versión web 0.2.0 añade el cliente de registro y perfiles sobre este mismo esquema, sin migraciones nuevas. Sus ajustes Auth y pruebas de correo se describen en [la guía de Supabase](SUPABASE.md#registro-web-020). La contratación y la ejecución de agentes siguen pendientes.
 
 ## 1 Identidad y alcance
 

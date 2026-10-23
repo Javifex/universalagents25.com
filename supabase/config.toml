@@ -21,8 +21,8 @@ sql_paths = ["./seed.sql"]
 
 [auth]
 enabled = true
-site_url = "http://127.0.0.1:4173"
-additional_redirect_urls = ["https://universalagents25.com"]
+site_url = "http://127.0.0.1:4173/cuenta.html"
+additional_redirect_urls = ["http://127.0.0.1:4173/cuenta.html", "https://universalagents25.com/cuenta.html"]
 enable_signup = true
 enable_anonymous_sign_ins = false
 

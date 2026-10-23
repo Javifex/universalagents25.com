@@ -1,11 +1,11 @@
 {
   "name": "universal-agents-25",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
-  "description": "Universal Agents 25: sitio público y base de datos Supabase preparada para desarrollo.",
+  "description": "Universal Agents 25: registro, acceso y perfiles con Supabase.",
   "scripts": {
-    "test": "node --test tests/intent.test.cjs tests/scene.test.cjs tests/database.test.mjs",
-    "check": "node --check home.js && node --check multiplier-scene.js && python tests/check_site.py",
+    "test": "node --test tests/intent.test.cjs tests/scene.test.cjs tests/account.test.cjs tests/database.test.mjs",
+    "check": "node --check home.js && node --check multiplier-scene.js && node --check cuenta.js && python tests/check_site.py",
     "db:start": "supabase db start",
     "db:reset": "supabase db reset --local",
     "db:lint": "supabase db lint --local --level error --fail-on error",
@@ -17,5 +17,8 @@
   "devDependencies": {
     "@electric-sql/pglite": "0.5.11",
     "supabase": "2.121.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.118.0"
   }
 }

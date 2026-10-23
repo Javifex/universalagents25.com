@@ -1,0 +1,2 @@
+# Preserve the upstream SDK bytes required by the HTML integrity attribute.
+vendor/supabase-*.js -text -diff linguist-vendored=true
