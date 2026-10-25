@@ -133,6 +133,17 @@ El 23 de octubre de 2026 se corrigió en el panel remoto `Site URL` a `https://u
 
 El 25 de octubre de 2026 se alineó la longitud mínima de contraseña a 12 tanto en Auth remoto como en `supabase/config.toml`. La API alojada rechazó una solicitud de registro con 11 caracteres mediante HTTP 422, con el mensaje «Password should be at least 12 characters», antes de crear una cuenta o enviar correo. `npm run check` comprueba también el mínimo de la configuración local para evitar que vuelva al valor predeterminado de seis caracteres.
 
+Ese mismo día se guardó y se verificó tras recargar SMTP personalizado con `mail.smtp2go.com:587` y remitente `soporte@universalagents25.com`. Las credenciales permanecen exclusivamente en Supabase. Una cuenta temporal, marcada expresamente como prueba y dirigida al correo de soporte del titular, permitió comprobar contra las APIs alojadas:
+
+- Alta aceptada y solicitud de correo de confirmación; perfil creado automáticamente y privado.
+- Acceso sin confirmar rechazado con `email_not_confirmed`.
+- Verificación del token mediante `/auth/v1/verify`, HTTP 303 al destino autorizado, y login posterior HTTP 200.
+- Edición del perfil propio HTTP 200; lectura anónima del perfil privado vacía; cambio de UUID HTTP 403; nombre fuera de límite HTTP 400.
+- Solicitud de correo de recuperación HTTP 200; verificación del enlace de recuperación; cambio de contraseña; contraseña anterior rechazada y nueva admitida.
+- Cierre global de sesión HTTP 204 y refresh token revocado rechazado con HTTP 400.
+
+Los hashes de confirmación y recuperación usados en la prueba se consultaron únicamente sobre la identidad temporal conocida para reproducir los enlaces; no se abrió Gmail ni se verificó visualmente la entrega en la bandeja. No se guardaron contraseñas ni tokens en el repositorio, las capturas o el informe. La identidad y su perfil fueron eliminados al terminar; quedaron cero usuarios y perfiles de prueba. La aceptación SMTP y la verificación HTTP están probadas; la recepción visual en Gmail y el recorrido manual en un teléfono quedan como comprobaciones distintas.
+
 Referencias: [registro y confirmación](https://supabase.com/docs/reference/javascript/auth-signup), [recuperación de contraseña](https://supabase.com/docs/reference/javascript/auth-resetpasswordforemail), [SMTP](https://supabase.com/docs/guides/auth/auth-smtp).
 
 ## Referencias técnicas

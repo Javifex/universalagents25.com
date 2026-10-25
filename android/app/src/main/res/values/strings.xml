@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es">
+    <string name="app_name">Universal Agents 25</string>
+    <string name="brand_title">× Universal Agents 25</string>
+    <string name="home">Inicio</string>
+    <string name="account">Mi cuenta</string>
+    <string name="back">Atrás</string>
+    <string name="reload">Recargar</string>
+    <string name="loading">Cargando página</string>
+    <string name="network_error">No pudimos cargar la página. Comprueba tu conexión y vuelve a intentarlo.</string>
+    <string name="http_error">La página no está disponible en este momento. Vuelve a intentarlo.</string>
+    <string name="secure_connection_error">No se pudo verificar una conexión segura. Inténtalo de nuevo más tarde.</string>
+    <string name="retry">Reintentar</string>
+    <string name="blocked_link">Este enlace no está permitido en la app.</string>
+    <string name="no_external_app">No hay una aplicación disponible para abrir este enlace.</string>
+</resources>

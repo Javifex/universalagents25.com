@@ -1,4 +1,5 @@
 exclude:
+  - android/
   - docs/
   - supabase/
   - tests/

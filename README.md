@@ -8,7 +8,11 @@ Sitio: https://universalagents25.com/
 
 La web incluye registro, inicio de sesión, confirmación por correo, recuperación de contraseña y edición del perfil en `cuenta.html`, conectados a Supabase `PrimerTestUniversalAgents25` (`ylyjlxpfbxdxebukdezt`). La contratación y la ejecución real de agentes siguen en desarrollo; los tres agentes iniciales están en borrador.
 
-El funcionamiento del correo requiere configurar SMTP y las URLs de Auth en el proyecto remoto. Los ajustes y la prueba de aceptación se describen en [la guía de Supabase](docs/SUPABASE.md#registro-web-020).
+SMTP2GO y las URLs de Auth están configurados en el proyecto remoto. Registro, confirmación, acceso, recuperación y revocación de sesión se comprobaron mediante la API real con una cuenta temporal ya eliminada. Los ajustes y los límites de esa prueba se describen en [la guía de Supabase](docs/SUPABASE.md#registro-web-020).
+
+## Android
+
+La app de `android/` abre la misma web y utiliza las mismas cuentas, con controles de inicio, cuenta, historial, recarga y reintento. Requiere Internet y Android 8 o posterior. [Compilación, seguridad y pruebas de Android](docs/ANDROID.md).
 
 ## Base de datos
 
