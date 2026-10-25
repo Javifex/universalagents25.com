@@ -3,11 +3,14 @@ import base64
 import json
 import hashlib
 import struct
+import tomllib
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
+supabase_config = tomllib.loads((ROOT / "supabase/config.toml").read_text(encoding="utf-8"))
+assert supabase_config["auth"]["minimum_password_length"] >= 12, "Local Auth must require at least 12 password characters"
 
 
 class Page(HTMLParser):
@@ -96,4 +99,4 @@ for icon in manifest["icons"]:
     assert icon["sizes"] == f"{width}x{height}", "Incorrect icon dimensions"
 
 assert (ROOT / "CNAME").read_text().strip() == "universalagents25.com"
-print("PASS: assets, anchors, accessibility references, metadata, and manifest icons")
+print("PASS: assets, anchors, accessibility references, metadata, manifest icons, and local password policy")

@@ -21,7 +21,7 @@ Supabase será la fuente común de identidad, datos y archivos privados. El esqu
 
 ## Verificación
 
-Con Node.js 22+ y Python 3:
+Con Node.js 22+ y Python 3.11+:
 
 ```powershell
 npm ci

@@ -65,7 +65,7 @@ Una subida administrativa no asigna automáticamente el archivo al titular del e
 
 ## Preparación local
 
-Requisitos: Node.js 22 o posterior y Python 3. Para levantar Supabase local también se necesita Docker en funcionamiento. Los tests de PostgreSQL en memoria no necesitan Docker ni credenciales.
+Requisitos: Node.js 22 o posterior y Python 3.11 o posterior. Para levantar Supabase local también se necesita Docker en funcionamiento. Los tests de PostgreSQL en memoria no necesitan Docker ni credenciales.
 
 ```powershell
 npm ci
@@ -130,6 +130,8 @@ Configurar en el proyecto remoto, sin ejecutar `config push` con la configuraci�
 Las pruebas automatizadas usan SDK simulado para comprobar estados, payloads, errores, confirmación sin sesión y carreras de identidad; las 110 comprobaciones SQL validan permisos con PostgreSQL. No afirman que SMTP o la configuración remota de redirecciones estén activos: eso requiere la prueba de aceptación por correo.
 
 El 23 de octubre de 2026 se corrigió en el panel remoto `Site URL` a `https://universalagents25.com/cuenta.html` y se añadió exactamente esa URL a la lista de redirecciones, sin comodines ni localhost. Una solicitud con un token deliberadamente inválido confirmó HTTP 303 hacia la página de cuenta con el error esperado `otp_expired`; antes volvía a `localhost:3000`. No se creó una cuenta ni se envió correo en esa comprobación. Se comprobó que SMTP personalizado está desactivado: configurar un remitente y verificar el recorrido por correo sigue siendo requisito para el registro público.
+
+El 25 de octubre de 2026 se alineó la longitud mínima de contraseña a 12 tanto en Auth remoto como en `supabase/config.toml`. La API alojada rechazó una solicitud de registro con 11 caracteres mediante HTTP 422, con el mensaje «Password should be at least 12 characters», antes de crear una cuenta o enviar correo. `npm run check` comprueba también el mínimo de la configuración local para evitar que vuelva al valor predeterminado de seis caracteres.
 
 Referencias: [registro y confirmación](https://supabase.com/docs/reference/javascript/auth-signup), [recuperación de contraseña](https://supabase.com/docs/reference/javascript/auth-resetpasswordforemail), [SMTP](https://supabase.com/docs/guides/auth/auth-smtp).
 
