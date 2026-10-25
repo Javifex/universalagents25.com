@@ -6,7 +6,13 @@ Sitio: https://universalagents25.com/
 
 ## Estado
 
-La web publicada es una presentación estática. El esquema Supabase ya está instalado en `PrimerTestUniversalAgents25` (`ylyjlxpfbxdxebukdezt`), con los tres agentes iniciales en borrador. La interfaz todavía no tiene registro, contratación ni ejecución real de agentes.
+La web incluye registro, inicio de sesión, confirmación por correo, recuperación de contraseña y edición del perfil en `cuenta.html`, conectados a Supabase `PrimerTestUniversalAgents25` (`ylyjlxpfbxdxebukdezt`). La contratación y la ejecución real de agentes siguen en desarrollo; los tres agentes iniciales están en borrador.
+
+SMTP2GO y las URLs de Auth están configurados en el proyecto remoto. Registro, confirmación, acceso, recuperación y revocación de sesión se comprobaron mediante la API real con una cuenta temporal ya eliminada. Los ajustes y los límites de esa prueba se describen en [la guía de Supabase](docs/SUPABASE.md#registro-web-020).
+
+## Android
+
+La app de `android/` abre la misma web y utiliza las mismas cuentas, con controles de inicio, cuenta, historial, recarga y reintento. Requiere Internet y Android 8 o posterior. [Compilación, seguridad y pruebas de Android](docs/ANDROID.md).
 
 ## Base de datos
 
@@ -19,7 +25,7 @@ Supabase será la fuente común de identidad, datos y archivos privados. El esqu
 
 ## Verificación
 
-Con Node.js 22+ y Python 3:
+Con Node.js 22+ y Python 3.11+:
 
 ```powershell
 npm ci
@@ -28,3 +34,5 @@ npm test
 ```
 
 Los tests de PostgreSQL en memoria son efímeros y no requieren Supabase remoto. CI ejecuta además las comprobaciones SQL sobre Supabase local. Los archivos de backend, pruebas y documentación se excluyen de GitHub Pages.
+
+El SDK oficial `@supabase/supabase-js@2.118.0` se sirve desde `vendor/`, con licencia y hash de integridad comprobados contra el paquete bloqueado. No se carga un CDN externo en la página de cuenta. Al actualizarlo, copiar su distribución UMD y actualizar su nombre, la integridad HTML y la comprobación en `tests/check_site.py`.

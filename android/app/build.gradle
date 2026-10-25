@@ -1,0 +1,32 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace = "com.universalagents25.app"
+    compileSdk = 37
+
+    defaultConfig {
+        applicationId = "com.universalagents25.app"
+        minSdk = 26
+        targetSdk = 37
+        versionCode = 1
+        versionName = "0.2.0"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError = true
+        warningsAsErrors = true
+        // Tool versions are deliberately pinned for this app's verified build.
+        disable "AndroidGradlePluginVersion"
+    }
+}
+
+dependencies {
+    testImplementation "junit:junit:4.13.2"
+}

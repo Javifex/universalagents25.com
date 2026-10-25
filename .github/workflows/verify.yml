@@ -1,4 +1,4 @@
-name: Verify site and Supabase foundation
+name: Verify website, Supabase and Android
 
 on:
   push:
@@ -33,3 +33,18 @@ jobs:
       - name: Stop disposable database
         if: always()
         run: npx supabase stop --no-backup
+
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install Android platform
+        run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-37.0" "build-tools;36.0.0"
+      - name: Test, lint and build the Android app
+        working-directory: android
+        run: bash gradlew testDebugUnitTest lintDebug assembleDebug --no-daemon --console=plain
